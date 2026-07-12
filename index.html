@@ -7,7 +7,7 @@
 <meta name="description" content="NikPage — projektujemy dopracowane strony wizytówki dla firm i marek osobistych. Trzy style, jedna klasa. Wycena indywidualna.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Jost:wght@300;400;500;600&family=Fredoka:wght@300;400;500;600;700&family=Caveat:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&family=Shippori+Mincho:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Jost:wght@300;400;500;600&family=Baloo+2:wght@400;500;600;700;800&family=Caveat:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800&family=Shippori+Mincho:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
 <script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('nikpage-theme')||'elegant');}catch(e){}</script>
 <style>
   /* ============ MOTYWY ============ */
@@ -31,8 +31,8 @@
     --maxw:1180px;
   }
   [data-theme="funky"]{
-    --font-head:'Fredoka',system-ui,sans-serif;
-    --font-body:'Quicksand',system-ui,sans-serif;
+    --font-head:'Baloo 2',system-ui,sans-serif;
+    --font-body:'Nunito',system-ui,sans-serif;
     --font-accent:'Caveat',cursive;
     --em-style:normal;
     --cream:#FAF7FF; --cream-2:#F3EEFF; --cream-3:#ECE4FF;
@@ -101,7 +101,7 @@
   .mk.t-elegant{background:#FFFDF7;color:#7F1D1D;box-shadow:inset 0 0 0 2px #7F1D1D,var(--shadow-soft)}
   .mk.t-elegant span{font-family:'Playfair Display',serif}
   .mk.t-funky{background:#6D28D9;color:#FAF7FF}
-  .mk.t-funky span{font-family:'Fredoka',sans-serif}
+  .mk.t-funky span{font-family:'Baloo 2',sans-serif}
   .mk.t-porcelain{background:#032E5E;color:#FDF4E6}
   .mk.t-porcelain span{font-family:'Shippori Mincho',serif}
 
@@ -266,7 +266,7 @@
   /* ============ FUNKY — rozpraszacze + wibracja ============ */
   .funky-deco{position:fixed;inset:0;z-index:6;pointer-events:none;overflow:hidden;display:none}
   [data-theme="funky"] .funky-deco{display:block}
-  .fd{position:absolute;font-family:'Fredoka',sans-serif;font-weight:700;will-change:transform;opacity:.72}
+  .fd{position:absolute;font-family:'Baloo 2',sans-serif;font-weight:700;will-change:transform;opacity:.72}
   .fd.star{color:#F59E0B}.fd.dot{color:#EC4899}.fd.violet{color:#6D28D9}.fd.lav{color:#A78BFA}
   .fd.f1{top:15%;left:5%;font-size:3rem}.fd.f2{top:26%;right:7%;font-size:2.2rem}
   .fd.f3{top:47%;left:2.5%;font-size:2.7rem}.fd.f4{top:63%;right:4%;font-size:3.4rem}
@@ -293,6 +293,12 @@
   .wind svg path{fill:none;stroke:var(--wine);stroke-width:3;stroke-linecap:round;opacity:.5}
   .wind svg.go{animation:gust 1.9s ease-out forwards}
   @keyframes gust{0%{opacity:0;transform:translate(var(--gx0,-48vw),0) rotate(var(--gr,-3deg))}18%{opacity:.75}100%{opacity:0;transform:translate(var(--gx1,120vw),var(--gy1,0)) rotate(var(--gr2,2deg))}}
+  /* liście opadające na całej stronie (porcelana) */
+  .leaf-layer{position:fixed;inset:0;z-index:37;pointer-events:none;overflow:hidden;display:none}
+  [data-theme="porcelain"] .leaf-layer{display:block}
+  .leaf{position:absolute;top:-8%;background:var(--petal);border-radius:100% 0 100% 0;opacity:0;box-shadow:0 3px 10px rgba(3,46,94,.16);will-change:transform;animation:leafFall linear infinite}
+  .leaf.gold{background:var(--gold-soft)}
+  @keyframes leafFall{0%{opacity:0;transform:translate(0,-10vh) rotate(0)}9%{opacity:.85}90%{opacity:.85}100%{opacity:0;transform:translate(var(--sx,4vw),114vh) rotate(680deg)}}
 
   /* ============ MARQUEE ============ */
   .marquee{background:var(--wine);color:var(--cream);padding:22px 0;overflow:hidden;white-space:nowrap;position:relative;z-index:2}
@@ -510,45 +516,71 @@
   </svg>
 </div>
 
+<!-- PORCELANA: opadające liście na całej stronie -->
+<div class="leaf-layer" aria-hidden="true">
+  <span class="leaf" style="left:6%;--sx:5vw;width:44px;height:44px;animation-duration:11s;animation-delay:0s"></span>
+  <span class="leaf gold" style="left:14%;--sx:-4vw;width:34px;height:34px;animation-duration:14s;animation-delay:3s"></span>
+  <span class="leaf" style="left:22%;--sx:6vw;width:52px;height:52px;animation-duration:10s;animation-delay:6s"></span>
+  <span class="leaf" style="left:31%;--sx:-6vw;width:38px;height:38px;animation-duration:13s;animation-delay:1.5s"></span>
+  <span class="leaf gold" style="left:40%;--sx:4vw;width:30px;height:30px;animation-duration:15s;animation-delay:8s"></span>
+  <span class="leaf" style="left:48%;--sx:7vw;width:56px;height:56px;animation-duration:12s;animation-delay:4s"></span>
+  <span class="leaf" style="left:57%;--sx:-5vw;width:40px;height:40px;animation-duration:11.5s;animation-delay:9.5s"></span>
+  <span class="leaf gold" style="left:65%;--sx:5vw;width:34px;height:34px;animation-duration:14.5s;animation-delay:2.5s"></span>
+  <span class="leaf" style="left:73%;--sx:-7vw;width:50px;height:50px;animation-duration:10.5s;animation-delay:7s"></span>
+  <span class="leaf" style="left:81%;--sx:4vw;width:36px;height:36px;animation-duration:13.5s;animation-delay:5s"></span>
+  <span class="leaf gold" style="left:89%;--sx:-4vw;width:32px;height:32px;animation-duration:12.5s;animation-delay:10s"></span>
+  <span class="leaf" style="left:95%;--sx:6vw;width:46px;height:46px;animation-duration:11s;animation-delay:3.8s"></span>
+  <span class="leaf" style="left:36%;--sx:-5vw;width:48px;height:48px;animation-duration:9.5s;animation-delay:12s"></span>
+  <span class="leaf gold" style="left:68%;--sx:6vw;width:30px;height:30px;animation-duration:16s;animation-delay:6.5s"></span>
+</div>
+
 <!-- HERO -->
 <section class="hero" id="top">
   <div class="porcelain-bg" aria-hidden="true">
     <div class="enso-big"></div>
     <svg class="ink-tree-big" viewBox="0 0 640 560" preserveAspectRatio="xMidYMax meet">
       <g>
-        <path class="bw" style="--d:260;stroke-width:11" d="M320 545 C 314 470 308 400 320 330"/>
-        <path class="bw" style="--d:260;stroke-width:8" d="M320 360 C 262 330 210 292 168 232"/>
-        <path class="bw" style="--d:280;stroke-width:8" d="M320 335 C 378 305 452 268 500 205"/>
-        <path class="bw" style="--d:220;stroke-width:7" d="M320 300 C 300 250 292 202 306 150"/>
-        <path class="bw" style="--d:170;stroke-width:5" d="M168 232 C 138 200 118 172 108 132"/>
-        <path class="bw" style="--d:150;stroke-width:5" d="M168 232 C 150 258 140 286 142 312"/>
-        <path class="bw" style="--d:170;stroke-width:5" d="M500 205 C 534 176 558 148 568 112"/>
-        <path class="bw" style="--d:150;stroke-width:5" d="M500 205 C 516 236 528 262 528 292"/>
-        <path class="bw" style="--d:160;stroke-width:5" d="M306 150 C 288 116 280 92 286 60"/>
-        <path class="bw" style="--d:150;stroke-width:5" d="M306 150 C 330 122 356 108 384 100"/>
-        <path class="bw" style="--d:90;stroke-width:3" d="M108 132 C 96 112 90 100 82 86"/>
-        <path class="bw" style="--d:90;stroke-width:3" d="M568 112 C 582 96 590 84 598 72"/>
-        <path class="bw" style="--d:80;stroke-width:3" d="M286 60 C 278 42 276 32 274 20"/>
-        <path class="bw" style="--d:90;stroke-width:3" d="M384 100 C 406 90 424 86 442 86"/>
-        <path class="bw" style="--d:90;stroke-width:3" d="M142 312 C 130 332 126 352 128 372"/>
+        <path class="bw" style="--d:280;stroke-width:13" d="M320 550 C 313 468 305 396 320 320"/>
+        <path class="bw" style="--d:280;stroke-width:8" d="M320 360 C 258 332 206 296 160 236"/>
+        <path class="bw" style="--d:300;stroke-width:8" d="M320 340 C 380 310 452 272 502 208"/>
+        <path class="bw" style="--d:230;stroke-width:7" d="M320 320 C 300 262 292 208 306 150"/>
+        <path class="bw" style="--d:200;stroke-width:6" d="M320 400 C 276 384 236 372 196 348"/>
+        <path class="bw" style="--d:190;stroke-width:6" d="M320 388 C 366 372 410 358 448 330"/>
+        <path class="bw" style="--d:170;stroke-width:5" d="M160 236 C 130 204 110 176 100 138"/>
+        <path class="bw" style="--d:160;stroke-width:5" d="M160 236 C 142 262 132 290 134 318"/>
+        <path class="bw" style="--d:120;stroke-width:4" d="M160 236 C 178 210 200 196 226 190"/>
+        <path class="bw" style="--d:170;stroke-width:5" d="M502 208 C 536 178 560 150 570 112"/>
+        <path class="bw" style="--d:160;stroke-width:5" d="M502 208 C 518 240 530 266 530 296"/>
+        <path class="bw" style="--d:120;stroke-width:4" d="M502 208 C 480 186 458 176 432 174"/>
+        <path class="bw" style="--d:150;stroke-width:5" d="M306 150 C 288 116 280 92 286 58"/>
+        <path class="bw" style="--d:150;stroke-width:5" d="M306 150 C 330 122 356 108 386 100"/>
+        <path class="bw" style="--d:110;stroke-width:4" d="M306 150 C 300 128 292 112 278 104"/>
+        <path class="bw" style="--d:90;stroke-width:3" d="M100 138 C 88 118 82 104 74 90"/>
+        <path class="bw" style="--d:80;stroke-width:3" d="M100 138 C 84 132 72 128 60 128"/>
+        <path class="bw" style="--d:90;stroke-width:3" d="M570 112 C 584 96 592 84 600 72"/>
+        <path class="bw" style="--d:80;stroke-width:3" d="M570 112 C 586 118 596 122 606 122"/>
+        <path class="bw" style="--d:80;stroke-width:3" d="M286 58 C 278 40 276 30 274 18"/>
+        <path class="bw" style="--d:90;stroke-width:3" d="M386 100 C 408 90 426 86 444 86"/>
+        <path class="bw" style="--d:80;stroke-width:3" d="M226 190 C 240 176 250 168 264 164"/>
+        <path class="bw" style="--d:80;stroke-width:3" d="M432 174 C 418 160 410 152 408 140"/>
+        <path class="bw" style="--d:90;stroke-width:3" d="M134 318 C 122 338 118 358 120 378"/>
+        <path class="bw" style="--d:90;stroke-width:3" d="M530 296 C 542 316 546 336 544 356"/>
+        <path class="bw" style="--d:80;stroke-width:3" d="M196 348 C 182 366 176 384 178 402"/>
+        <path class="bw" style="--d:80;stroke-width:3" d="M448 330 C 464 346 472 362 472 380"/>
       </g>
       <g>
-        <circle class="bloom" cx="82" cy="86" r="10"/><circle class="bloom c" cx="98" cy="104" r="6"/><circle class="bloom" cx="112" cy="130" r="7"/>
-        <circle class="bloom" cx="598" cy="72" r="10"/><circle class="bloom c" cx="582" cy="92" r="6"/><circle class="bloom" cx="566" cy="112" r="7"/>
-        <circle class="bloom" cx="274" cy="20" r="10"/><circle class="bloom c" cx="288" cy="44" r="6"/><circle class="bloom" cx="286" cy="62" r="7"/>
-        <circle class="bloom" cx="442" cy="86" r="9"/><circle class="bloom c" cx="420" cy="102" r="6"/><circle class="bloom" cx="386" cy="100" r="7"/>
-        <circle class="bloom" cx="128" cy="372" r="8"/><circle class="bloom c" cx="146" cy="340" r="5"/>
-        <circle class="bloom" cx="528" cy="292" r="8"/><circle class="bloom c" cx="512" cy="314" r="5"/>
-        <circle class="bloom" cx="300" cy="188" r="6"/><circle class="bloom c" cx="430" cy="240" r="5"/><circle class="bloom" cx="212" cy="262" r="6"/>
+        <circle class="bloom" cx="72" cy="88" r="10"/><circle class="bloom c" cx="64" cy="104" r="6"/><circle class="bloom" cx="58" cy="126" r="7"/><circle class="bloom" cx="88" cy="120" r="6"/><circle class="bloom c" cx="102" cy="140" r="7"/>
+        <circle class="bloom" cx="600" cy="70" r="10"/><circle class="bloom c" cx="594" cy="86" r="6"/><circle class="bloom" cx="606" cy="120" r="7"/><circle class="bloom" cx="586" cy="116" r="6"/><circle class="bloom c" cx="570" cy="112" r="7"/>
+        <circle class="bloom" cx="274" cy="16" r="10"/><circle class="bloom c" cx="282" cy="36" r="6"/><circle class="bloom" cx="286" cy="58" r="7"/>
+        <circle class="bloom" cx="444" cy="84" r="9"/><circle class="bloom c" cx="426" cy="98" r="6"/><circle class="bloom" cx="408" cy="88" r="6"/><circle class="bloom c" cx="388" cy="102" r="7"/>
+        <circle class="bloom" cx="264" cy="162" r="7"/><circle class="bloom c" cx="248" cy="176" r="5"/><circle class="bloom" cx="228" cy="190" r="6"/>
+        <circle class="bloom" cx="408" cy="138" r="7"/><circle class="bloom c" cx="420" cy="158" r="5"/><circle class="bloom" cx="432" cy="174" r="6"/>
+        <circle class="bloom" cx="120" cy="378" r="7"/><circle class="bloom c" cx="128" cy="344" r="5"/>
+        <circle class="bloom" cx="544" cy="356" r="7"/><circle class="bloom c" cx="536" cy="320" r="5"/>
+        <circle class="bloom" cx="178" cy="402" r="6"/><circle class="bloom c" cx="472" cy="380" r="6"/>
+        <circle class="bloom" cx="200" cy="252" r="6"/><circle class="bloom c" cx="430" cy="240" r="5"/><circle class="bloom" cx="300" cy="204" r="6"/><circle class="bloom c" cx="360" cy="182" r="5"/><circle class="bloom" cx="250" cy="142" r="5"/><circle class="bloom c" cx="470" cy="150" r="5"/>
       </g>
     </svg>
-    <span class="p-fall" style="left:14%;--sx:50px;animation-duration:9s;animation-delay:.4s;width:32px;height:32px"></span>
-    <span class="p-fall" style="left:30%;--sx:-60px;animation-duration:12s;animation-delay:2.2s;width:22px;height:22px"></span>
-    <span class="p-fall" style="left:46%;--sx:70px;animation-duration:10s;animation-delay:1.1s;width:30px;height:30px"></span>
-    <span class="p-fall" style="left:60%;--sx:-50px;animation-duration:13s;animation-delay:3.4s;width:38px;height:38px"></span>
-    <span class="p-fall" style="left:74%;--sx:60px;animation-duration:11s;animation-delay:.9s;width:26px;height:26px"></span>
-    <span class="p-fall" style="left:86%;--sx:-70px;animation-duration:12.5s;animation-delay:2.6s;width:24px;height:24px"></span>
-    <span class="p-fall" style="left:52%;--sx:40px;animation-duration:9.5s;animation-delay:4.2s;width:20px;height:20px"></span>
   </div>
   <div class="wrap hero-grid">
     <div class="hero-copy">
