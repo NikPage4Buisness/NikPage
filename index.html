@@ -83,7 +83,7 @@
   body,.marquee,.process,.contact,footer,.services,.pricing-card,.pricing-card .left,.why-visual,form,.reel-panel{transition:background-color .6s var(--ease),color .6s var(--ease),border-color .6s var(--ease)}
 
   /* ============ PRZEŁĄCZNIK MOTYWÓW (logo obok nazwy) ============ */
-  .brand{display:flex;align-items:center;gap:14px}
+  .brand{display:flex;align-items:center;gap:14px;position:relative}
   .switch{position:relative;width:46px;height:46px;transition:width .4s var(--ease),height .4s var(--ease);z-index:65}
   header.nav.scrolled .switch{width:40px;height:40px}
   .mk{position:absolute;top:0;left:0;width:46px;height:46px;border-radius:13px;border:none;padding:0;cursor:pointer;display:grid;place-items:center;font-weight:700;font-size:1.35rem;box-shadow:var(--shadow-soft);transition:width .4s var(--ease),height .4s var(--ease),transform .45s var(--ease),opacity .35s var(--ease)}
@@ -137,7 +137,8 @@
   .eyebrow::before{content:"";width:38px;height:1px;background:var(--gold)}
   .hero h1{font-size:clamp(2.9rem,6vw,5rem);color:var(--wine);font-weight:600}
   .hero h1 em,.sec-head h2 em,.contact-info h2 em,.foot-cta h2 em{font-style:var(--em-style);font-family:var(--font-accent)}
-  .hero h1 .grad{font-family:var(--font-accent);background:linear-gradient(100deg,var(--grad-a) 0%,var(--grad-b) 50%,var(--grad-c) 100%);background-size:220% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 6s linear infinite}
+  .hero h1 .grad{font-family:var(--font-accent);background:linear-gradient(100deg,var(--grad-a) 0%,var(--grad-b) 50%,var(--grad-c) 100%);background-size:220% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 6s linear infinite;padding-right:.18em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+  [data-theme="funky"] .hero h1 .grad{padding-right:.34em}
   @keyframes shimmer{to{background-position:220% center}}
   .hero p.lead{font-size:1.18rem;color:var(--muted);margin:32px 0 40px;max-width:500px;font-weight:400}
   .hero-cta{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
@@ -256,12 +257,12 @@
   @keyframes bigfall{0%{opacity:0;transform:translate(0,-20px) rotate(0)}8%{opacity:.85}92%{opacity:.85}100%{opacity:0;transform:translate(var(--sx,60px),820px) rotate(720deg)}}
 
   /* ============ PODPOWIEDŹ ZMIANY MOTYWU ============ */
-  .theme-hint{position:absolute;left:4px;top:calc(100% + 4px);display:flex;align-items:flex-start;gap:2px;pointer-events:none;animation:hintBob 2.4s ease-in-out infinite;transition:opacity .5s var(--ease);z-index:64}
+  .theme-hint{position:absolute;left:6px;top:calc(100% + 2px);display:flex;align-items:flex-start;gap:2px;pointer-events:none;animation:hintBob 2.4s ease-in-out infinite;transition:left .4s var(--ease),top .4s var(--ease);z-index:64}
+  header.nav.scrolled .theme-hint{left:3px}
   .theme-hint .th-arrow{width:30px;height:36px;color:var(--gold);flex:0 0 auto}
   .theme-hint .th-arrow path{fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
   .theme-hint .th-txt{font-family:var(--font-accent);font-style:italic;font-size:1.05rem;color:var(--wine);white-space:nowrap;font-weight:600;margin-top:10px}
   @keyframes hintBob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
-  .switch:hover ~ .theme-hint,body.theme-tried .theme-hint,header.nav.scrolled .theme-hint{opacity:0}
 
   /* ============ FUNKY — rozpraszacze + wibracja ============ */
   .funky-deco{position:fixed;inset:0;z-index:6;pointer-events:none;overflow:hidden;display:none}
@@ -273,10 +274,26 @@
   .fd.f5{top:82%;left:9%;font-size:2rem}.fd.f6{top:7%;left:47%;font-size:1.8rem}
   .fd.f7{top:72%;left:43%;font-size:2.5rem}.fd.f8{top:37%;right:19%;font-size:1.7rem}
   .fd.f9{top:90%;right:14%;font-size:2.9rem}.fd.f10{top:19%;left:24%;font-size:1.6rem}
+  .fd.f11{top:11%;right:24%;font-size:2.1rem}.fd.f12{top:34%;left:15%;font-size:1.5rem}
+  .fd.f13{top:55%;right:11%;font-size:2.8rem}.fd.f14{top:68%;left:29%;font-size:1.9rem}
+  .fd.f15{top:88%;right:27%;font-size:2.3rem}.fd.f16{top:4%;left:34%;font-size:1.6rem}
+  .fd.f17{top:23%;left:41%;font-size:2rem}.fd.f18{top:45%;right:33%;font-size:1.7rem}
+  .fd.f19{top:58%;left:49%;font-size:2.4rem}.fd.f20{top:79%;right:39%;font-size:1.8rem}
+  .fd.f21{top:14%;left:63%;font-size:2.6rem}.fd.f22{top:31%;right:45%;font-size:1.5rem}
+  .fd.f23{top:51%;left:7%;font-size:2rem}.fd.f24{top:64%;right:49%;font-size:2.9rem}
+  .fd.f25{top:85%;left:55%;font-size:1.7rem}.fd.f26{top:8%;right:39%;font-size:2.2rem}
+  .fd.f27{top:40%;left:71%;font-size:1.9rem}.fd.f28{top:75%;left:81%;font-size:2.5rem}
+  .fd.f29{top:27%;left:88%;font-size:1.6rem}.fd.f30{top:61%;right:2.5%;font-size:2.1rem}
   [data-theme="funky"] .reveal,[data-theme="funky"] .reveal-l,[data-theme="funky"] .reveal-r{transform:none}
   [data-theme="funky"] .hero h1,[data-theme="funky"] .sec-head h2{animation:fkWobble 3.2s ease-in-out infinite}
   @keyframes fkWobble{0%,100%{transform:rotate(-1.1deg)}50%{transform:rotate(1.1deg)}}
   [data-theme="funky"] .marquee .track{animation-duration:16s}
+
+  /* ============ ELEGANT — złote zdobienia w tle (parallax) ============ */
+  .elegant-deco{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;display:none}
+  [data-theme="elegant"] .elegant-deco{display:block}
+  .ed{position:absolute;color:var(--gold);line-height:1;font-family:'Playfair Display',serif;will-change:transform}
+  @keyframes edTwinkle{0%,100%{opacity:var(--o,.16)}50%{opacity:calc(var(--o,.16) * .45)}}
 
   /* ============ PORCELANA — symbole w tle + wiatr ============ */
   .jp-symbols{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;display:none;user-select:none}
@@ -468,7 +485,7 @@
       <a href="#top" class="logo"><span><b>Nik</b>Page</span></a>
       <div class="theme-hint" id="themeHint">
         <svg class="th-arrow" viewBox="0 0 40 48" aria-hidden="true"><path d="M31 45 C 13 43 5 27 19 12"/><path d="M19 12 L10 16 M19 12 L25 21"/></svg>
-        <span class="th-txt">Wypróbuj</span>
+        <span class="th-txt">Wypróbuj inny styl</span>
       </div>
     </div>
     <nav class="links">
@@ -483,6 +500,58 @@
   </div>
 </header>
 
+<!-- ELEGANT: złote zdobienia w tle (parallax na scroll) -->
+<div class="elegant-deco" aria-hidden="true">
+  <span class="ed" data-speed="0.14" style="top:6%;left:4%;font-size:2.2rem;--o:.18;opacity:.18;animation:edTwinkle 5s ease-in-out infinite">✦</span>
+  <span class="ed" data-speed="-0.20" style="top:9%;left:20%;font-size:1.2rem;--o:.14;opacity:.14;animation:edTwinkle 6s ease-in-out .4s infinite">❖</span>
+  <span class="ed" data-speed="0.24" style="top:4%;left:37%;font-size:1.6rem;--o:.13;opacity:.13;animation:edTwinkle 5.5s ease-in-out 1s infinite">✧</span>
+  <span class="ed" data-speed="-0.16" style="top:11%;left:54%;font-size:2.5rem;--o:.16;opacity:.16;animation:edTwinkle 7s ease-in-out .2s infinite">◆</span>
+  <span class="ed" data-speed="0.28" style="top:7%;left:71%;font-size:1.1rem;--o:.15;opacity:.15;animation:edTwinkle 4.5s ease-in-out 1.6s infinite">❋</span>
+  <span class="ed" data-speed="-0.22" style="top:5%;left:88%;font-size:1.9rem;--o:.17;opacity:.17;animation:edTwinkle 6.5s ease-in-out .8s infinite">✦</span>
+  <span class="ed" data-speed="0.18" style="top:17%;left:11%;font-size:1.4rem;--o:.14;opacity:.14;animation:edTwinkle 5s ease-in-out 2.2s infinite">⬦</span>
+  <span class="ed" data-speed="-0.26" style="top:19%;left:29%;font-size:2rem;--o:.12;opacity:.12;animation:edTwinkle 6s ease-in-out 1.2s infinite">✤</span>
+  <span class="ed" data-speed="0.20" style="top:22%;left:46%;font-size:1.1rem;--o:.16;opacity:.16;animation:edTwinkle 4.8s ease-in-out .6s infinite">✱</span>
+  <span class="ed" data-speed="-0.14" style="top:15%;left:63%;font-size:1.7rem;--o:.13;opacity:.13;animation:edTwinkle 7s ease-in-out 2s infinite">✧</span>
+  <span class="ed" data-speed="0.30" style="top:21%;left:80%;font-size:2.3rem;--o:.18;opacity:.18;animation:edTwinkle 5.5s ease-in-out .3s infinite">✦</span>
+  <span class="ed" data-speed="-0.18" style="top:24%;left:95%;font-size:1.3rem;--o:.14;opacity:.14;animation:edTwinkle 6s ease-in-out 1.8s infinite">❖</span>
+  <span class="ed" data-speed="0.16" style="top:31%;left:6%;font-size:2.6rem;--o:.15;opacity:.15;animation:edTwinkle 6.5s ease-in-out .9s infinite">◆</span>
+  <span class="ed" data-speed="-0.24" style="top:34%;left:23%;font-size:1.2rem;--o:.13;opacity:.13;animation:edTwinkle 5s ease-in-out 2.4s infinite">⟡</span>
+  <span class="ed" data-speed="0.22" style="top:29%;left:41%;font-size:1.8rem;--o:.12;opacity:.12;animation:edTwinkle 7s ease-in-out .5s infinite">✧</span>
+  <span class="ed" data-speed="-0.28" style="top:36%;left:58%;font-size:1.1rem;--o:.16;opacity:.16;animation:edTwinkle 4.5s ease-in-out 1.4s infinite">❃</span>
+  <span class="ed" data-speed="0.14" style="top:32%;left:75%;font-size:2.1rem;--o:.17;opacity:.17;animation:edTwinkle 6s ease-in-out .7s infinite">✦</span>
+  <span class="ed" data-speed="-0.20" style="top:38%;left:91%;font-size:1.5rem;--o:.14;opacity:.14;animation:edTwinkle 5.5s ease-in-out 2.1s infinite">✤</span>
+  <span class="ed" data-speed="0.26" style="top:45%;left:3%;font-size:1.3rem;--o:.15;opacity:.15;animation:edTwinkle 6.5s ease-in-out 1.1s infinite">✧</span>
+  <span class="ed" data-speed="-0.16" style="top:47%;left:18%;font-size:2.4rem;--o:.13;opacity:.13;animation:edTwinkle 7s ease-in-out .4s infinite">◆</span>
+  <span class="ed" data-speed="0.18" style="top:43%;left:35%;font-size:1.1rem;--o:.16;opacity:.16;animation:edTwinkle 4.8s ease-in-out 1.9s infinite">✱</span>
+  <span class="ed" data-speed="-0.30" style="top:49%;left:52%;font-size:1.9rem;--o:.12;opacity:.12;animation:edTwinkle 5s ease-in-out .8s infinite">❋</span>
+  <span class="ed" data-speed="0.20" style="top:44%;left:69%;font-size:1.4rem;--o:.15;opacity:.15;animation:edTwinkle 6s ease-in-out 2.3s infinite">✦</span>
+  <span class="ed" data-speed="-0.22" style="top:50%;left:86%;font-size:2.2rem;--o:.17;opacity:.17;animation:edTwinkle 6.5s ease-in-out .6s infinite">✧</span>
+  <span class="ed" data-speed="0.24" style="top:57%;left:9%;font-size:1.6rem;--o:.14;opacity:.14;animation:edTwinkle 5.5s ease-in-out 1.5s infinite">⬦</span>
+  <span class="ed" data-speed="-0.18" style="top:59%;left:26%;font-size:1.1rem;--o:.13;opacity:.13;animation:edTwinkle 7s ease-in-out .3s infinite">❖</span>
+  <span class="ed" data-speed="0.28" style="top:54%;left:44%;font-size:2.5rem;--o:.16;opacity:.16;animation:edTwinkle 4.5s ease-in-out 2s infinite">◆</span>
+  <span class="ed" data-speed="-0.14" style="top:61%;left:61%;font-size:1.3rem;--o:.12;opacity:.12;animation:edTwinkle 6s ease-in-out 1.2s infinite">✧</span>
+  <span class="ed" data-speed="0.16" style="top:56%;left:78%;font-size:1.8rem;--o:.15;opacity:.15;animation:edTwinkle 5s ease-in-out .9s infinite">✦</span>
+  <span class="ed" data-speed="-0.26" style="top:62%;left:94%;font-size:1.2rem;--o:.14;opacity:.14;animation:edTwinkle 6.5s ease-in-out 2.4s infinite">✤</span>
+  <span class="ed" data-speed="0.22" style="top:69%;left:5%;font-size:2.1rem;--o:.17;opacity:.17;animation:edTwinkle 7s ease-in-out .5s infinite">✧</span>
+  <span class="ed" data-speed="-0.20" style="top:71%;left:22%;font-size:1.4rem;--o:.13;opacity:.13;animation:edTwinkle 5.5s ease-in-out 1.7s infinite">❃</span>
+  <span class="ed" data-speed="0.30" style="top:66%;left:39%;font-size:1.1rem;--o:.16;opacity:.16;animation:edTwinkle 4.8s ease-in-out .7s infinite">✱</span>
+  <span class="ed" data-speed="-0.16" style="top:73%;left:57%;font-size:2.4rem;--o:.15;opacity:.15;animation:edTwinkle 6s ease-in-out 2.1s infinite">◆</span>
+  <span class="ed" data-speed="0.18" style="top:68%;left:74%;font-size:1.6rem;--o:.12;opacity:.12;animation:edTwinkle 6.5s ease-in-out 1s infinite">✦</span>
+  <span class="ed" data-speed="-0.24" style="top:74%;left:90%;font-size:1.3rem;--o:.14;opacity:.14;animation:edTwinkle 5s ease-in-out .4s infinite">✧</span>
+  <span class="ed" data-speed="0.14" style="top:81%;left:8%;font-size:1.9rem;--o:.16;opacity:.16;animation:edTwinkle 7s ease-in-out 2.3s infinite">⟡</span>
+  <span class="ed" data-speed="-0.28" style="top:83%;left:25%;font-size:1.1rem;--o:.13;opacity:.13;animation:edTwinkle 5.5s ease-in-out .8s infinite">❖</span>
+  <span class="ed" data-speed="0.20" style="top:78%;left:43%;font-size:2.3rem;--o:.15;opacity:.15;animation:edTwinkle 4.5s ease-in-out 1.6s infinite">✦</span>
+  <span class="ed" data-speed="-0.18" style="top:85%;left:60%;font-size:1.4rem;--o:.12;opacity:.12;animation:edTwinkle 6s ease-in-out .6s infinite">✧</span>
+  <span class="ed" data-speed="0.26" style="top:80%;left:77%;font-size:1.6rem;--o:.17;opacity:.17;animation:edTwinkle 6.5s ease-in-out 2s infinite">◆</span>
+  <span class="ed" data-speed="-0.22" style="top:86%;left:93%;font-size:1.2rem;--o:.14;opacity:.14;animation:edTwinkle 5s ease-in-out 1.1s infinite">✤</span>
+  <span class="ed" data-speed="0.16" style="top:92%;left:12%;font-size:2.2rem;--o:.15;opacity:.15;animation:edTwinkle 7s ease-in-out .3s infinite">✧</span>
+  <span class="ed" data-speed="-0.14" style="top:94%;left:31%;font-size:1.3rem;--o:.13;opacity:.13;animation:edTwinkle 5.5s ease-in-out 1.9s infinite">❋</span>
+  <span class="ed" data-speed="0.24" style="top:90%;left:49%;font-size:1.7rem;--o:.16;opacity:.16;animation:edTwinkle 4.8s ease-in-out .7s infinite">✦</span>
+  <span class="ed" data-speed="-0.26" style="top:95%;left:67%;font-size:1.1rem;--o:.12;opacity:.12;animation:edTwinkle 6s ease-in-out 2.2s infinite">⬦</span>
+  <span class="ed" data-speed="0.18" style="top:91%;left:84%;font-size:2rem;--o:.15;opacity:.15;animation:edTwinkle 6.5s ease-in-out 1s infinite">◆</span>
+  <span class="ed" data-speed="-0.20" style="top:2%;left:47%;font-size:1.4rem;--o:.13;opacity:.13;animation:edTwinkle 5s ease-in-out .5s infinite">✧</span>
+</div>
+
 <!-- FUNKY: kreskówkowe rozpraszacze (parallax na scroll) -->
 <div class="funky-deco" aria-hidden="true">
   <span class="fd star f1" data-speed="0.18">★</span>
@@ -495,6 +564,26 @@
   <span class="fd star f8" data-speed="-0.24">◆</span>
   <span class="fd dot f9" data-speed="0.16">★</span>
   <span class="fd violet f10" data-speed="-0.20">✧</span>
+  <span class="fd star f11" data-speed="0.24">★</span>
+  <span class="fd dot f12" data-speed="-0.18">●</span>
+  <span class="fd violet f13" data-speed="0.28">✦</span>
+  <span class="fd lav f14" data-speed="-0.26">✧</span>
+  <span class="fd star f15" data-speed="0.15">✳</span>
+  <span class="fd dot f16" data-speed="-0.30">✿</span>
+  <span class="fd violet f17" data-speed="0.22">✚</span>
+  <span class="fd lav f18" data-speed="-0.16">～</span>
+  <span class="fd star f19" data-speed="0.30">◆</span>
+  <span class="fd dot f20" data-speed="-0.22">★</span>
+  <span class="fd violet f21" data-speed="0.19">✧</span>
+  <span class="fd lav f22" data-speed="-0.28">✦</span>
+  <span class="fd star f23" data-speed="0.26">✳</span>
+  <span class="fd dot f24" data-speed="-0.14">●</span>
+  <span class="fd violet f25" data-speed="0.20">✚</span>
+  <span class="fd star f26" data-speed="-0.24">★</span>
+  <span class="fd lav f27" data-speed="0.17">～</span>
+  <span class="fd dot f28" data-speed="-0.20">✿</span>
+  <span class="fd violet f29" data-speed="0.29">✦</span>
+  <span class="fd star f30" data-speed="-0.18">◆</span>
 </div>
 
 <!-- PORCELANA: wielkie symbole w tle -->
@@ -594,7 +683,7 @@
       <div class="hero-stats reveal">
         <div class="s"><b data-count="7">0</b><span>dni realizacji</span></div>
         <div class="s"><b data-count="100" data-suffix="%">0</b><span>responsywności</span></div>
-        <div class="s"><b data-count="3" data-suffix="">0</b><span>style do wyboru</span></div>
+        <div class="s"><b data-count="3" data-suffix="">0</b><span>Indywidualne koncepty</span></div>
       </div>
     </div>
 
@@ -840,6 +929,7 @@
   // ===== NAV / MENU =====
   const nav=document.getElementById('nav');
   const funkyDeco=[...document.querySelectorAll('.funky-deco .fd')];
+  const elegantDeco=[...document.querySelectorAll('.elegant-deco .ed')];
   const jps=[...document.querySelectorAll('.jp')];
   const windSvg=document.querySelector('.wind svg');
   const GUSTS=[
@@ -849,6 +939,7 @@
     {gx0:'118vw',gx1:'-58vw',gy1:'-12vh',gr:'7deg',gr2:'-2deg',top:'60%',flip:-1}
   ];
   function funkyParallax(y){funkyDeco.forEach(el=>{const s=+el.dataset.speed;el.style.transform='translateY('+(y*s)+'px) rotate('+(y*s*0.6)+'deg)';});}
+  function elegantParallax(y){elegantDeco.forEach(el=>{const s=+el.dataset.speed;el.style.transform='translateY('+(y*s)+'px) rotate('+(y*s*0.4)+'deg)';});}
   function jpParallax(y){jps.forEach(el=>{const s=+el.dataset.speed;el.style.transform='translateY('+(y*s)+'px)';});}
   function gust(){
     if(!windSvg)return;
@@ -863,6 +954,7 @@
   function onScrollAll(){
     const y=window.scrollY,theme=document.documentElement.getAttribute('data-theme');
     nav.classList.toggle('scrolled',y>30);
+    if(theme==='elegant')elegantParallax(y);
     if(theme==='funky')funkyParallax(y);
     if(theme==='porcelain'){jpParallax(y);if(y>lastY&&y-gustAnchor>600){gustAnchor=y;gust();}}else{gustAnchor=y;}
     lastY=y;ticking=false;
