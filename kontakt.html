@@ -154,27 +154,35 @@
 <script>
   var form=document.getElementById('contactForm'), successBox=document.getElementById('formSuccess');
   var submitBtn=form.querySelector('button[type="submit"]');
+  var emailRe=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  function showMsg(text,isError){
+    successBox.textContent=text;
+    if(isError){successBox.style.background='#7a2530';successBox.style.color='#fff';}
+    else{successBox.style.background='';successBox.style.color='';}
+    successBox.classList.add('show');
+    successBox.scrollIntoView({behavior:'smooth',block:'center'});
+  }
   form.addEventListener('submit',async function(e){
     e.preventDefault();
     var n=document.getElementById('name'),em=document.getElementById('email'),msg=document.getElementById('message');
     var ok=true;
     [n,em,msg].forEach(function(f){if(!f.value.trim()){f.style.borderColor='#c0392b';ok=false;}else f.style.borderColor='';});
-    if(!ok)return;
+    if(!ok){showMsg('⚠️ Uzupełnij wymagane pola: imię, e-mail i opis projektu.',true);return;}
+    if(!emailRe.test(em.value.trim())){em.style.borderColor='#c0392b';showMsg('⚠️ Podaj poprawny adres e-mail (np. jan@firma.pl).',true);return;}
     var orig=submitBtn.innerHTML; submitBtn.disabled=true; submitBtn.textContent='Wysyłanie…';
-    successBox.style.background='';successBox.style.color='';
+    successBox.classList.remove('show');
     try{
       var res=await fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}});
       if(res.ok){
-        successBox.textContent='✅ Dziękuję! Wiadomość została wysłana — odezwę się wkrótce.';
-        successBox.classList.add('show');
+        showMsg('✅ Dziękuję! Wiadomość została wysłana — odezwę się wkrótce.',false);
         form.reset();
-        successBox.scrollIntoView({behavior:'smooth',block:'center'});
-      }else{throw new Error();}
+      }else{
+        var data=await res.json().catch(function(){return null;});
+        var detail=(data&&data.errors&&data.errors[0]&&data.errors[0].message)?(' ('+data.errors[0].message+')'):'';
+        showMsg('⚠️ Nie udało się wysłać'+detail+'. Napisz bezpośrednio: michal.nikielski@nikpage.pl',true);
+      }
     }catch(err){
-      successBox.textContent='⚠️ Nie udało się wysłać. Napisz bezpośrednio: michal.nikielski@nikpage.pl';
-      successBox.style.background='#7a2530';successBox.style.color='#fff';
-      successBox.classList.add('show');
-      successBox.scrollIntoView({behavior:'smooth',block:'center'});
+      showMsg('⚠️ Nie udało się wysłać. Napisz bezpośrednio: michal.nikielski@nikpage.pl',true);
     }finally{
       submitBtn.disabled=false;submitBtn.innerHTML=orig;
     }
