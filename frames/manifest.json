@@ -1,8 +1,8 @@
 {
   "source": { "filename": "source.mp4", "duration": 12.04, "fps": 24, "origin": "Higgsfield seedance_2_0 e575b3cd" },
   "frames": { "target_count": 120, "format": "webp", "naming_pattern": "frame-{NNNN}.webp" },
-  "recommended_scroll_height": "360vh",
-  "budget_mb": 5,
-  "desktop": { "resolution": "1792x1008", "quality": 50, "actual_count": 120, "total_mb": 4.97 },
-  "mobile": { "resolution": "960x540", "quality": 58, "actual_count": 120, "total_mb": 2.62 }
+  "recommended_scroll_height": "480vh",
+  "budget_mb": 8,
+  "desktop": { "resolution": "1920x1080", "quality": 76, "actual_count": 120, "total_mb": 7.29 },
+  "mobile": { "resolution": "960x540", "quality": 74, "actual_count": 120, "total_mb": 3.10 }
 }
