@@ -388,7 +388,7 @@
 <script>
 (function(){
   'use strict';
-  var FRAME_COUNT = 120;
+  var FRAME_COUNT = 150;
   var isMobile = window.matchMedia('(max-width:768px)').matches;
   var FRAME_DIR = isMobile ? 'frames/mobile/' : 'frames/desktop/';
   var LERP_FACTOR = 0.09;
@@ -619,7 +619,7 @@
   /* ===== INIT LOAD ===== */
   function initLoad(){
     // critical frames first (evenly spaced), then the rest
-    var critical=[0,20,40,60,80,100,119];
+    var critical=[0,25,50,75,100,125,149];
     var pending=critical.length;
     critical.forEach(function(i){
       loadFrame(i,function(){
@@ -639,7 +639,7 @@
   /* ===== GALLERY ===== */
   function buildGallery(){
     var grid=document.getElementById('galleryGrid');
-    var picks=[10,30,50,72,94,114];
+    var picks=[12,40,68,96,124,148];
     var tallSet={0:true,3:true};
     picks.forEach(function(fi,idx){
       var div=document.createElement('div');
