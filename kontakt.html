@@ -3,14 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- Google Analytics (GA4) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-S2J18H7SKJ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-S2J18H7SKJ');
-</script>
+<!-- Google Analytics (GA4) — wlacza sie dopiero po zgodzie na pliki cookie -->
+<script src="consent.js" defer></script>
 <title>NikPage — Formularz kontaktowy</title>
 <meta name="description" content="Opowiedz o swoim projekcie — strona internetowa, edycja strony, automatyzacja procesów lub obróbka graficzna. Odpowiadam w ciągu 24 godzin.">
 <meta name="author" content="Michał Nikielski — NikPage">
@@ -218,6 +212,9 @@ fieldset{border:0;min-width:0}
 .consent input:checked + .box{background:var(--g-400);border-color:var(--g-400)}
 .consent input:checked + .box::after{transform:rotate(45deg) scale(1)}
 
+.privacy-note{margin-top:10px;font-size:.74rem;line-height:1.55;color:var(--n-400)}
+.privacy-note a{color:var(--g-400);text-decoration:underline;text-underline-offset:3px}
+
 /* bledy */
 .err{display:none;margin-top:10px;font-size:.78rem;color:#E07A6E}
 .err.show{display:block;animation:up .4s var(--ease)}
@@ -256,6 +253,10 @@ fieldset{border:0;min-width:0}
 footer{position:relative;z-index:1;text-align:center;padding:10px 18px 36px;font-size:.78rem;color:var(--n-500)}
 footer a{color:var(--n-300);transition:color .3s var(--ease)}
 footer a:hover{color:var(--g-400)}
+footer .legal{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 18px;margin-top:10px;font-size:.74rem}
+footer .linkish{font:inherit;background:none;border:0;padding:0;cursor:pointer;color:var(--n-300);transition:color .3s var(--ease)}
+footer .linkish:hover{color:var(--g-400)}
+footer a:focus-visible,footer .linkish:focus-visible,.privacy-note a:focus-visible{outline:2px solid var(--g-300);outline-offset:3px}
 
 @media(max-width:620px){
   .cards{grid-template-columns:1fr}
@@ -350,7 +351,7 @@ footer a:hover{color:var(--g-400)}
             </div>
             <div class="field">
               <label for="firma">Nazwa firmy / działalności</label>
-              <input id="firma" autocomplete="organization" placeholder="Wpisz lub wyszukaj po NIP">
+              <input id="firma" autocomplete="organization" maxlength="200" placeholder="Wpisz lub wyszukaj po NIP">
             </div>
           </div>
         </div>
@@ -362,11 +363,11 @@ footer a:hover{color:var(--g-400)}
         <legend><span class="k">Dane kontaktowe</span></legend>
         <div class="field">
           <label for="name">Imię i nazwisko</label>
-          <input id="name" autocomplete="name" placeholder="Jan Kowalski">
+          <input id="name" autocomplete="name" maxlength="100" placeholder="Jan Kowalski">
         </div>
         <div class="row2">
-          <div class="field"><label for="phone">Telefon</label><input id="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+48 600 700 800"></div>
-          <div class="field"><label for="email">E-mail</label><input id="email" type="email" inputmode="email" autocomplete="email" placeholder="jan@firma.pl"></div>
+          <div class="field"><label for="phone">Telefon</label><input id="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="30" placeholder="+48 600 700 800"></div>
+          <div class="field"><label for="email">E-mail</label><input id="email" type="email" inputmode="email" autocomplete="email" maxlength="254" placeholder="jan@firma.pl"></div>
         </div>
         <p class="hint">Wystarczy telefon albo e-mail.</p>
         <p class="err" id="eName">Podaj imię i nazwisko.</p>
@@ -401,12 +402,13 @@ footer a:hover{color:var(--g-400)}
       <!-- WIADOMOSC -->
       <fieldset class="blk fx" style="--d:.7s">
         <legend><span class="k">Kilka słów o projekcie</span><span class="h">Opcjonalnie</span></legend>
-        <div class="field"><textarea id="msg" rows="4" placeholder="Czym zajmuje się Twoja firma, czego potrzebujesz, czy masz termin?"></textarea></div>
+        <div class="field"><textarea id="msg" rows="4" maxlength="3000" placeholder="Czym zajmuje się Twoja firma, czego potrzebujesz, czy masz termin?"></textarea></div>
       </fieldset>
 
       <div class="fx" style="--d:.76s">
         <label class="consent"><input type="checkbox" id="consent"><span class="box" aria-hidden="true"></span>Zgadzam się na kontakt w sprawie mojego zapytania i przetwarzanie podanych danych wyłącznie w tym celu.</label>
         <p class="err" id="eConsent">Zaznacz zgodę, żebym mógł się z Tobą skontaktować.</p>
+        <p class="privacy-note">Dane z formularza trafiają wyłącznie do mnie i służą tylko do odpowiedzi na zgłoszenie. Szczegóły w <a href="polityka-prywatnosci.html">polityce prywatności</a>.</p>
         <input type="text" id="hp" name="_gotcha" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true">
         <button class="submit" type="submit" id="submitBtn">Wyślij zgłoszenie</button>
         <p class="form-msg" id="formMsg" role="status" aria-live="polite"></p>
@@ -423,7 +425,9 @@ footer a:hover{color:var(--g-400)}
   </section>
 </div>
 
-<footer>Wolisz od razu? <a href="tel:+48662477772">+48 662 477 772</a> · <a href="mailto:michal.nikielski@nikpage.pl">michal.nikielski@nikpage.pl</a></footer>
+<footer>Wolisz od razu? <a href="tel:+48662477772">+48 662 477 772</a> · <a href="mailto:michal.nikielski@nikpage.pl">michal.nikielski@nikpage.pl</a>
+  <span class="legal"><a href="polityka-prywatnosci.html">Polityka prywatności</a><a href="dostepnosc.html">Dostępność</a><button type="button" class="linkish" data-cookie-settings>Ustawienia cookies</button></span>
+</footer>
 
 <script>
 (function(){
@@ -592,10 +596,18 @@ footer a:hover{color:var(--g-400)}
 
   /* ---------- WYSYLKA (Formspree) ---------- */
   var btn = $('submitBtn'), msg = $('formMsg');
+  var openedAt = Date.now();   /* czlowiek nie wypelni formularza w kilka sekund */
   form.addEventListener('submit', function(e){
     e.preventDefault();
     msg.textContent = ''; msg.className = 'form-msg';
     if(!validate()) return;
+    /* ochrona przed botami: wypelnione pole-pulapka albo wysylka szybsza,
+       niz czlowiek zdazylby wypelnic formularz */
+    if($('hp').value || Date.now() - openedAt < 4000){
+      msg.className = 'form-msg err-msg';
+      msg.textContent = 'Chwileczkę — spróbuj wysłać ponownie za kilka sekund.';
+      return;
+    }
 
     var name = $('name').value.trim();
     var fd = new FormData();
