@@ -11,8 +11,8 @@
   gtag('js', new Date());
   gtag('config', 'G-S2J18H7SKJ');
 </script>
-<title>NikPage — Zamów wycenę</title>
-<meta name="description" content="Zamów bezpłatną, indywidualną wycenę strony internetowej w NikPage. Opisz swój projekt — odezwę się zwykle w ciągu 24 godzin.">
+<title>NikPage — Formularz kontaktowy</title>
+<meta name="description" content="Opowiedz o swoim projekcie — strona internetowa, edycja strony, automatyzacja procesów lub obróbka graficzna. Odpowiadam w ciągu 24 godzin.">
 <meta name="author" content="Michał Nikielski — NikPage">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://www.nikpage.pl/kontakt.html">
@@ -21,193 +21,626 @@
 <link rel="apple-touch-icon" href="favicon.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="NikPage">
-<meta property="og:title" content="NikPage — Zamów wycenę">
-<meta property="og:description" content="Zamów bezpłatną, indywidualną wycenę strony internetowej. Odezwę się zwykle w ciągu 24 godzin.">
+<meta property="og:title" content="NikPage — Formularz kontaktowy">
+<meta property="og:description" content="Opowiedz o swoim projekcie. Odpowiadam w ciągu 24 godzin.">
 <meta property="og:url" content="https://www.nikpage.pl/kontakt.html">
 <meta property="og:image" content="https://www.nikpage.pl/assets/og-image.jpg">
 <meta property="og:locale" content="pl_PL">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Playfair+Display:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200..600&family=Playfair+Display:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
 <style>
-  /* ============ BAZA (bez zmiennych CSS z podwojnym myslnikiem) ============ */
-  *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{
-    font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;
-    background:#14100e;
-    color:#f4f0ea;
-    line-height:1.6;
-    min-height:100vh;
-    -webkit-font-smoothing:antialiased;
-    position:relative;
-    overflow-x:hidden;
-  }
-  h1,h2,h3{font-family:'Playfair Display','Georgia',serif;font-weight:300;line-height:1.15}
-  a{color:inherit;text-decoration:none}
-  ::selection{background:#7F1D1D;color:#f4f0ea}
+/* ============================================================
+   NIKPAGE — FORMULARZ KONTAKTOWY
+   Ta sama paleta co strona glowna. Efekty lekkie: tylko przesuniecia
+   i krycie (bez rozmyc i filtrow), zeby na telefonie nic nie przycinalo.
+   ============================================================ */
+:root{
+  --n-900:#0A0807; --n-800:#14100E; --n-700:#1A1512; --n-600:#28201A;
+  --n-500:#7D7268; --n-400:#9E9088; --n-300:#C8BFB0; --n-100:#F4F0EA;
+  --g-500:#B8944E; --g-400:#CBB078; --g-300:#E4CC96;
+  --w-500:#7F1D1D; --w-600:#7A2530; --w-400:#C0392B;
+  --font-serif:'Playfair Display',Georgia,'Times New Roman',serif;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:'Montserrat',-apple-system,BlinkMacSystemFont,sans-serif;font-weight:300;
+  background:var(--n-800);color:var(--n-100);line-height:1.6;
+  min-height:100vh;overflow-x:clip;-webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--w-500);color:var(--n-100)}
+button,input,textarea{font:inherit;color:inherit}
 
-  /* atmosfera */
-  .grain{position:fixed;inset:0;z-index:100;pointer-events:none;opacity:.035;mix-blend-mode:overlay}
-  .vignette{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(120% 120% at 50% 30%,transparent 45%,rgba(10,8,7,.6) 100%)}
-  .glow{position:fixed;top:-20%;left:50%;transform:translateX(-50%);width:min(900px,120vw);height:600px;z-index:0;pointer-events:none;background:radial-gradient(50% 50% at 50% 50%,rgba(127,29,29,.32),transparent 70%);filter:blur(30px)}
+/* ---------- tlo: dwie plamy swiatla dryfujace samym przesunieciem ---------- */
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;
+  background:
+    radial-gradient(90% 55% at 50% -8%, rgba(127,29,29,.34) 0%, rgba(127,29,29,0) 70%),
+    linear-gradient(180deg,#14100E 0%,#0A0807 100%)}
+.bg i{position:absolute;border-radius:50%;will-change:transform}
+.bg i:nth-child(1){width:70vmax;height:70vmax;left:-30vmax;top:30vh;
+  background:radial-gradient(circle,rgba(184,148,78,.13) 0%,rgba(184,148,78,0) 62%);
+  animation:drift1 24s ease-in-out infinite alternate}
+.bg i:nth-child(2){width:60vmax;height:60vmax;right:-28vmax;top:-10vh;
+  background:radial-gradient(circle,rgba(127,29,29,.30) 0%,rgba(127,29,29,0) 62%);
+  animation:drift2 28s ease-in-out infinite alternate}
+@keyframes drift1{to{transform:translate(12vmax,-8vmax)}}
+@keyframes drift2{to{transform:translate(-10vmax,14vmax)}}
 
-  .page{position:relative;z-index:2;max-width:760px;margin:0 auto;padding:40px clamp(22px,5vw,40px) 70px}
+.page{position:relative;z-index:1;max-width:780px;margin:0 auto;padding:22px clamp(18px,5vw,40px) 64px}
 
-  /* topbar */
-  .topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:48px}
-  .brand{display:flex;align-items:center;gap:14px}
-  .brand img{width:46px;height:auto;filter:drop-shadow(0 6px 16px rgba(184,148,78,.2))}
-  .brand .bt{font-family:'Playfair Display',serif;font-size:1.35rem;letter-spacing:.3em;text-transform:uppercase;padding-left:.3em}
-  .brand .bt b{color:#cbb078;font-weight:600}
-  .back{display:inline-flex;align-items:center;gap:9px;font-size:.82rem;letter-spacing:.06em;color:#c8bfb0;padding:10px 18px;border:1px solid rgba(244,240,234,.18);border-radius:100px;transition:border-color .35s ease,color .35s ease,transform .35s ease}
-  .back:hover{border-color:#cbb078;color:#cbb078;transform:translateX(-3px)}
+/* ---------- gora ---------- */
+.top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:clamp(34px,7vh,64px)}
+.brand{display:flex;align-items:center;gap:12px;font-family:var(--font-serif);font-size:1.15rem;letter-spacing:.04em}
+.brand img{width:34px;height:auto}
+.brand sup{font-size:.5em;color:var(--g-400)}
+.back{
+  display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:999px;
+  border:1px solid rgba(203,176,120,.3);
+  font-size:.66rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:var(--n-300);
+  transition:border-color .4s var(--ease),color .4s var(--ease)}
+.back:hover{border-color:var(--g-400);color:var(--g-400)}
 
-  /* naglowek */
-  .head{text-align:center;max-width:560px;margin:0 auto 44px}
-  .overline{display:inline-flex;align-items:center;gap:12px;font-size:.62rem;letter-spacing:.34em;text-transform:uppercase;color:#b8944e;font-weight:500;margin-bottom:20px}
-  .head h1{font-size:clamp(2.3rem,5.5vw,3.6rem);font-weight:300;margin-bottom:18px}
-  .head h1 em{font-style:italic;color:#cbb078}
-  .head p{font-size:1.05rem;color:#c8bfb0;font-weight:300}
+/* ---------- naglowek ---------- */
+.head{margin-bottom:clamp(30px,5vh,48px)}
+.over{display:inline-block;font-size:.64rem;font-weight:400;letter-spacing:.34em;text-transform:uppercase;color:var(--g-500);margin-bottom:16px}
+h1{font-family:var(--font-serif);font-weight:300;font-size:clamp(2.1rem,6.4vw,3.7rem);line-height:1.08;margin-bottom:18px}
+h1 em{
+  font-style:italic;
+  background:linear-gradient(100deg,var(--g-500) 0%,var(--g-400) 35%,var(--g-300) 47%,#F4F0EA 50%,var(--g-300) 53%,var(--g-400) 65%,var(--g-500) 100%);
+  background-size:260% 100%;
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
+  animation:shine 6s linear infinite}
+@keyframes shine{from{background-position:100% 0}to{background-position:-160% 0}}
+.lead{font-family:var(--font-serif);font-size:clamp(1rem,2.6vw,1.18rem);line-height:1.6;color:var(--n-300);max-width:52ch}
+.rule{position:relative;height:2px;margin-top:28px;overflow:hidden}
+.rule::before{content:"";position:absolute;inset:0;transform-origin:left center;
+  background:linear-gradient(90deg,rgba(228,204,150,0),rgba(244,240,234,1) 30%,rgba(228,204,150,.6) 70%,rgba(228,204,150,0));
+  animation:draw 1.4s var(--ease) .35s both}
+@keyframes draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 
-  /* szybki kontakt */
-  .quick{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:40px}
-  .quick a{display:inline-flex;align-items:center;gap:10px;font-size:.9rem;color:#c8bfb0;padding:12px 22px;background:rgba(244,240,234,.03);border:1px solid rgba(244,240,234,.08);border-radius:100px;transition:border-color .35s ease,color .35s ease}
-  .quick a:hover{border-color:#cbb078;color:#f4f0ea}
-  .quick a span{color:#cbb078}
+/* ---------- wejscia ---------- */
+.fx{animation:up .9s var(--ease) both;animation-delay:var(--d,0s)}
+@keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
 
-  /* formularz */
-  form{background:rgba(244,240,234,.03);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(244,240,234,.08);border-radius:20px;padding:clamp(28px,5vw,46px);box-shadow:0 40px 90px -50px rgba(0,0,0,.8)}
-  .form-success{display:none;background:#7F1D1D;color:#f4f0ea;padding:16px 18px;border-radius:12px;font-weight:500;text-align:center;margin-bottom:24px}
-  .form-success.show{display:block;animation:pop .5s cubic-bezier(.22,1,.36,1)}
-  @keyframes pop{from{transform:scale(.95);opacity:0}to{transform:scale(1);opacity:1}}
-  .row2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-  .field{margin-bottom:20px}
-  .field label{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#cbb078;font-weight:500;margin-bottom:10px}
-  .field label .opt{text-transform:none;letter-spacing:0;color:#9e9088;font-weight:400}
-  .field input,.field textarea,.field select{
-    width:100%;padding:15px 18px;border-radius:12px;
-    border:1px solid rgba(244,240,234,.14);
-    font-size:1rem;font-family:'DM Sans',sans-serif;color:#f4f0ea;
-    background:rgba(20,16,14,.6);
-    transition:border-color .3s ease,box-shadow .3s ease,background .3s ease;
-  }
-  .field input::placeholder,.field textarea::placeholder{color:#7d7268}
-  .field select{cursor:pointer}
-  .field select option{background:#14100e;color:#f4f0ea}
-  .field input:focus,.field textarea:focus,.field select:focus{
-    outline:none;border-color:#b8944e;
-    box-shadow:0 0 0 3px rgba(184,148,78,.18);
-    background:rgba(20,16,14,.85);
-  }
-  .field textarea{resize:vertical;min-height:140px}
-  .btn-submit{
-    width:100%;justify-content:center;display:inline-flex;align-items:center;gap:10px;
-    padding:17px;border:none;border-radius:100px;cursor:pointer;
-    font-family:'DM Sans',sans-serif;font-size:.95rem;font-weight:600;letter-spacing:.03em;
-    background:#b8944e;color:#14100e;margin-top:6px;
-    transition:transform .4s ease,box-shadow .4s ease;
-  }
-  .btn-submit:hover{transform:translateY(-3px);box-shadow:0 18px 40px -18px rgba(184,148,78,.7)}
-  .btn-submit:disabled{opacity:.6;cursor:default;transform:none;box-shadow:none}
-  .form-note{text-align:center;font-size:.8rem;color:#9e9088;margin-top:18px;font-weight:300}
+/* ---------- bloki pytan ---------- */
+fieldset{border:0;min-width:0}
+.blk{margin-bottom:clamp(30px,4.6vh,42px)}
+.blk legend{
+  display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  width:100%;padding-bottom:12px;margin-bottom:16px;
+  border-bottom:1px solid rgba(184,148,78,.2);transition:border-color .4s var(--ease)}
+.k{font-size:.7rem;font-weight:500;letter-spacing:.26em;text-transform:uppercase;color:var(--g-400)}
+.h{font-size:.72rem;color:var(--n-500)}
+.blk.bad legend{border-bottom-color:rgba(192,57,43,.7)}
 
-  footer{text-align:center;padding:30px 0 8px;color:#9e9088;font-size:.82rem;font-weight:300}
-  footer a{color:#cbb078}
+/* ukryte natywne pola — wyglad robia etykiety */
+.card input,.chip input,.consent input{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
 
-  @media(max-width:560px){.row2{grid-template-columns:1fr}.topbar{flex-direction:row}}
-  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01ms!important}}
+/* karty uslug */
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.card{
+  position:relative;display:block;cursor:pointer;
+  padding:18px 18px 18px 52px;border-radius:4px;
+  background:rgba(26,21,18,.62);border:1px solid rgba(203,176,120,.14);
+  transition:border-color .4s var(--ease),background .4s var(--ease),transform .4s var(--ease),box-shadow .4s var(--ease)}
+.card:hover{border-color:rgba(228,204,150,.42);transform:translateY(-2px)}
+.box{position:absolute;left:18px;top:20px;width:18px;height:18px;border-radius:3px;border:1px solid rgba(203,176,120,.5);transition:background .3s var(--ease),border-color .3s var(--ease)}
+.box::after{content:"";position:absolute;left:5px;top:1px;width:5px;height:10px;border:solid var(--n-900);border-width:0 2px 2px 0;transform:rotate(45deg) scale(0);transition:transform .35s var(--ease)}
+.c-t{display:block;font-family:var(--font-serif);font-size:1.08rem;line-height:1.3;color:var(--n-100);margin-bottom:6px}
+.c-d{display:block;font-size:.8rem;line-height:1.55;color:var(--n-400)}
+.card input:checked ~ .box{background:var(--g-400);border-color:var(--g-400)}
+.card input:checked ~ .box::after{transform:rotate(45deg) scale(1)}
+.card:has(input:checked){border-color:var(--g-400);background:rgba(127,29,29,.26);box-shadow:0 0 26px rgba(203,176,120,.12)}
+.card input:focus-visible ~ .box,.chip input:focus-visible + span,.consent input:focus-visible + .box{outline:2px solid var(--g-300);outline-offset:3px}
+
+/* budzet: rozwija sie pod kartami uslug */
+.budget{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows .55s var(--ease),opacity .45s var(--ease)}
+.budget.on{grid-template-rows:1fr;opacity:1}
+.budget-in{overflow:hidden;min-height:0}
+.bud-q{padding-top:22px;margin-bottom:12px;font-family:var(--font-serif);font-size:1.02rem;color:var(--n-100)}
+.budget.on .bud-q{animation:up .6s var(--ease) both}
+.tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+#budAuto .tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+.tile{position:relative;cursor:pointer}
+.tile input{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
+.tile span{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+  min-height:84px;padding:14px 8px;border-radius:4px;text-align:center;
+  background:rgba(26,21,18,.62);border:1px solid rgba(203,176,120,.18);
+  transition:border-color .4s var(--ease),background .4s var(--ease),transform .4s var(--ease),box-shadow .4s var(--ease)}
+.tile b{font-family:var(--font-serif);font-weight:300;font-size:1.22rem;line-height:1.2;color:var(--n-100);white-space:nowrap}
+.tile i{font-style:normal;font-size:.62rem;font-weight:400;letter-spacing:.24em;text-transform:uppercase;color:var(--g-500)}
+.tile:hover span{border-color:rgba(228,204,150,.45);transform:translateY(-2px)}
+.tile input:checked + span{background:rgba(127,29,29,.5);border-color:var(--g-400);box-shadow:0 0 24px rgba(203,176,120,.16)}
+.tile input:checked + span i{color:var(--g-300)}
+.tile input:focus-visible + span{outline:2px solid var(--g-300);outline-offset:3px}
+.budget.on .tile{animation:up .55s var(--ease) both}
+.budget.on .tile:nth-child(2){animation-delay:.07s}
+.budget.on .tile:nth-child(3){animation-delay:.14s}
+
+/* wybor firma / brak */
+.seg{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+/* chipy */
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{position:relative;cursor:pointer}
+.chip span{
+  display:inline-flex;align-items:center;min-height:44px;padding:10px 18px;border-radius:999px;
+  border:1px solid rgba(203,176,120,.24);background:rgba(26,21,18,.5);
+  font-size:.84rem;color:var(--n-300);
+  transition:background .35s var(--ease),border-color .35s var(--ease),color .35s var(--ease),box-shadow .35s var(--ease)}
+.chip:hover span{border-color:rgba(228,204,150,.5);color:var(--n-100)}
+.chip input:checked + span{background:rgba(127,29,29,.62);border-color:var(--g-400);color:var(--n-100);box-shadow:0 0 18px rgba(203,176,120,.16)}
+.chip-any input:checked + span{background:rgba(184,148,78,.2)}
+
+/* pola tekstowe */
+.field{margin-bottom:14px}
+.field label{display:block;font-size:.66rem;font-weight:400;letter-spacing:.18em;text-transform:uppercase;color:var(--n-400);margin-bottom:8px}
+.field label .opt{text-transform:none;letter-spacing:0;color:var(--n-500)}
+.field input,.field textarea{
+  display:block;width:100%;padding:14px 16px;border-radius:4px;
+  font-size:16px;                          /* 16 px: iPhone nie powieksza strony przy wpisywaniu */
+  background:rgba(20,16,14,.72);border:1px solid rgba(244,240,234,.12);color:var(--n-100);
+  transition:border-color .35s var(--ease),box-shadow .35s var(--ease)}
+.field textarea{resize:vertical;min-height:120px;line-height:1.5}
+.field input::placeholder,.field textarea::placeholder{color:var(--n-500)}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--g-500);box-shadow:0 0 0 3px rgba(184,148,78,.16)}
+.field input.bad-in{border-color:var(--w-400)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
+.hint{font-size:.76rem;color:var(--n-500);margin-top:-4px}
+
+/* firma: rozwijany blok */
+.company{display:grid;grid-template-rows:1fr;transition:grid-template-rows .55s var(--ease),opacity .4s var(--ease)}
+.company.off{grid-template-rows:0fr;opacity:0}
+.company-in{overflow:hidden;min-height:0}
+.nip-row{display:flex;gap:10px}
+.nip-row input{flex:1 1 auto;min-width:0;letter-spacing:.06em}
+.nip-btn{
+  flex:0 0 auto;padding:0 20px;border-radius:4px;cursor:pointer;
+  background:transparent;border:1px solid rgba(203,176,120,.45);
+  font-size:.66rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:var(--g-400);
+  transition:background .35s var(--ease),color .35s var(--ease)}
+.nip-btn:hover{background:var(--g-500);color:var(--n-900)}
+.nip-status{min-height:1.4em;margin-top:8px;font-size:.78rem;line-height:1.45;color:var(--n-400)}
+.nip-status.ok{color:var(--g-400)}
+.nip-status.warn{color:var(--n-300)}
+.nip-status.err{color:#E07A6E}
+.nip-status.busy::before{content:"";display:inline-block;width:8px;height:8px;margin-right:8px;border-radius:50%;background:var(--g-400);vertical-align:1px;animation:pulse 1s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.2;transform:scale(.6)}}
+.firm-found{animation:flash 1.2s var(--ease)}
+@keyframes flash{0%{box-shadow:0 0 0 0 rgba(228,204,150,.6)}100%{box-shadow:0 0 0 12px rgba(228,204,150,0)}}
+
+/* zgoda */
+.consent{position:relative;display:block;cursor:pointer;padding-left:32px;font-size:.8rem;line-height:1.55;color:var(--n-300);margin-bottom:6px}
+.consent .box{left:0;top:2px}
+.consent input:checked + .box{background:var(--g-400);border-color:var(--g-400)}
+.consent input:checked + .box::after{transform:rotate(45deg) scale(1)}
+
+/* bledy */
+.err{display:none;margin-top:10px;font-size:.78rem;color:#E07A6E}
+.err.show{display:block;animation:up .4s var(--ease)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+
+/* wyslij */
+.submit{
+  position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;
+  width:100%;margin-top:26px;padding:18px 24px;border:0;border-radius:999px;cursor:pointer;
+  background:var(--w-500);color:var(--n-100);
+  font-size:.74rem;font-weight:500;letter-spacing:.24em;text-indent:.24em;text-transform:uppercase;
+  box-shadow:0 0 28px rgba(127,29,29,.45);
+  transition:background .4s var(--ease),color .4s var(--ease),transform .4s var(--ease)}
+.submit::before{content:"";position:absolute;top:0;bottom:0;left:-40%;width:30%;transform:skewX(-20deg);
+  background:linear-gradient(90deg,transparent,rgba(244,240,234,.34),transparent);animation:sheen 4.5s var(--ease) infinite}
+@keyframes sheen{0%{left:-40%}60%,100%{left:130%}}
+.submit:hover{background:var(--g-500);color:var(--n-900)}
+.submit:disabled{opacity:.65;cursor:default}
+.form-msg{min-height:1.4em;margin-top:14px;text-align:center;font-size:.84rem;color:var(--n-300)}
+.form-msg.err-msg{color:#E07A6E}
+.note{text-align:center;margin-top:6px;font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--n-500)}
+.note b{font-weight:400;color:var(--g-400)}
+
+/* podziekowanie */
+.done{text-align:center;padding:clamp(30px,8vh,80px) 0}
+.done svg{width:74px;height:74px;margin-bottom:22px}
+.done circle{fill:none;stroke:rgba(203,176,120,.35);stroke-width:1.5}
+.done path{fill:none;stroke:var(--g-300);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:40;stroke-dashoffset:40;animation:tick .9s var(--ease) .3s forwards}
+@keyframes tick{to{stroke-dashoffset:0}}
+.done h2{font-family:var(--font-serif);font-weight:300;font-size:clamp(1.8rem,5vw,2.6rem);line-height:1.15;margin-bottom:14px}
+.done h2 em{font-style:italic;color:var(--g-400)}
+.done p{font-family:var(--font-serif);color:var(--n-300);max-width:44ch;margin:0 auto 28px}
+.done a{display:inline-flex;padding:14px 30px;border-radius:999px;border:1px solid rgba(203,176,120,.4);font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;transition:border-color .4s var(--ease),color .4s var(--ease)}
+.done a:hover{border-color:var(--g-400);color:var(--g-400)}
+
+footer{position:relative;z-index:1;text-align:center;padding:10px 18px 36px;font-size:.78rem;color:var(--n-500)}
+footer a{color:var(--n-300);transition:color .3s var(--ease)}
+footer a:hover{color:var(--g-400)}
+
+@media(max-width:620px){
+  .cards{grid-template-columns:1fr}
+  .tile b{font-size:1rem}
+  .tile span{min-height:72px;padding:12px 4px}
+  .row2{grid-template-columns:1fr}
+  .top .back span{display:none}
+  .chip span{padding:9px 15px;font-size:.8rem}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none !important;transition:none !important}
+  .rule::before{transform:none}
+  .done path{stroke-dashoffset:0}
+}
 </style>
 </head>
 <body>
 
-<svg class="grain" xmlns="http://www.w3.org/2000/svg"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#noise)"/></svg>
-<div class="glow"></div>
-<div class="vignette"></div>
+<div class="bg" aria-hidden="true"><i></i><i></i></div>
 
 <div class="page">
-  <div class="topbar">
-    <a href="index.html" class="brand" aria-label="NikPage — strona główna">
-      <img src="assets/logo.png" alt="NikPage" width="46">
-      <span class="bt"><b>Nik</b>Page</span>
-    </a>
-    <a href="index.html" class="back">← Wróć</a>
-  </div>
+  <header class="top fx">
+    <a class="brand" href="index.html" aria-label="NikPage — strona główna"><img src="assets/logo.png" alt="" width="34" height="29"><span>NikPage<sup>&reg;</sup></span></a>
+    <a class="back" href="index.html#kontakt">← <span>Wróć na stronę</span></a>
+  </header>
 
-  <div class="head">
-    <span class="overline">Wycena indywidualna</span>
-    <h1>Porozmawiajmy o <em>Twojej stronie</em></h1>
-    <p>Opisz krótko, czego potrzebujesz. Odezwę się z pytaniami i indywidualną wyceną — zwykle w ciągu 24 godzin. Bez zobowiązań.</p>
-  </div>
-
-  <div class="quick">
-    <a href="mailto:michal.nikielski@nikpage.pl"><span>✉</span> michal.nikielski@nikpage.pl</a>
-    <a href="tel:+48662477772"><span>☏</span> +48 662 477 772</a>
-  </div>
-
-  <form id="contactForm" action="https://formspree.io/f/xpqvakdb" method="POST" novalidate>
-    <div class="form-success" id="formSuccess">✅ Dziękuję! Wiadomość została wysłana — odezwę się wkrótce.</div>
-    <input type="hidden" name="_subject" value="Nowe zapytanie ze strony NikPage (v2)">
-    <div class="row2">
-      <div class="field"><label for="name">Imię i nazwisko</label><input type="text" id="name" name="name" placeholder="Jan Kowalski" required></div>
-      <div class="field"><label for="email">E-mail</label><input type="email" id="email" name="email" placeholder="jan@firma.pl" required></div>
+  <main id="formWrap">
+    <div class="head">
+      <span class="over fx" style="--d:.05s">Formularz kontaktowy</span>
+      <h1 class="fx" style="--d:.12s">Opowiedz mi o <em>swoim projekcie</em></h1>
+      <p class="lead fx" style="--d:.2s">Wypełnienie zajmie około dwóch minut. Odezwę się w ciągu 24 godzin z pytaniami i konkretną propozycją — bez zobowiązań.</p>
+      <div class="rule" aria-hidden="true"></div>
     </div>
-    <div class="row2">
-      <div class="field"><label for="phone">Telefon <span class="opt">(opcjonalnie)</span></label><input type="tel" id="phone" name="phone" placeholder="+48 600 700 800"></div>
-      <div class="field"><label for="type">Rodzaj strony</label>
-        <select id="type" name="type">
-          <option>Strona wizytówka</option>
-          <option>Landing page</option>
-          <option>Marka osobista</option>
-          <option>Redesign istniejącej strony</option>
-          <option>Jeszcze nie wiem — doradź</option>
-        </select>
+
+    <form id="leadForm" action="https://formspree.io/f/xpqvakdb" method="POST" novalidate>
+
+      <!-- USLUGA -->
+      <fieldset class="blk fx" style="--d:.3s" id="bService">
+        <legend><span class="k">Usługa</span><span class="h">Możesz zaznaczyć kilka</span></legend>
+        <div class="cards">
+          <label class="card"><input type="checkbox" name="usluga" value="Strona internetowa od podstaw"><span class="box" aria-hidden="true"></span>
+            <span class="c-t">Strona internetowa od podstaw</span><span class="c-d">Projekt i wdrożenie nowej strony pod Twoją firmę.</span></label>
+          <label class="card"><input type="checkbox" name="usluga" value="Edycja istniejącej strony"><span class="box" aria-hidden="true"></span>
+            <span class="c-t">Edycja istniejącej strony</span><span class="c-d">Zmiany wyglądu, treści albo nowe sekcje.</span></label>
+          <label class="card"><input type="checkbox" name="usluga" value="Automatyzacja procesów w firmie"><span class="box" aria-hidden="true"></span>
+            <span class="c-t">Automatyzacja procesów w firmie</span><span class="c-d">Segregacja dokumentów, udrożnienie pipeline’u, podsumowania dokumentacji, lepszy przepływ informacji.</span></label>
+          <label class="card"><input type="checkbox" name="usluga" value="Obróbka graficzna produktowa"><span class="box" aria-hidden="true"></span>
+            <span class="c-t">Obróbka graficzna produktowa</span><span class="c-d">Zdjęcia i grafiki produktów gotowe do sklepu i druku.</span></label>
+        </div>
+        <p class="err" id="eService">Wybierz co najmniej jedną usługę.</p>
+
+        <!-- BUDZET — pokazuje sie po zaznaczeniu uslugi, ktorej dotyczy -->
+        <div class="budget" id="budWeb" data-service="Strona internetowa od podstaw" inert>
+          <div class="budget-in">
+            <p class="bud-q">Jaki budżet planujesz na stronę od podstaw?</p>
+            <div class="tiles">
+              <label class="tile"><input type="radio" name="budzet_strona" value="700–800 zł"><span><b>700 – 800</b><i>zł</i></span></label>
+              <label class="tile"><input type="radio" name="budzet_strona" value="900–1000 zł"><span><b>900 – 1000</b><i>zł</i></span></label>
+              <label class="tile"><input type="radio" name="budzet_strona" value="1500–1700 zł"><span><b>1500 – 1700</b><i>zł</i></span></label>
+            </div>
+            <p class="err">Wybierz budżet na stronę.</p>
+          </div>
+        </div>
+        <div class="budget" id="budAuto" data-service="Automatyzacja procesów w firmie" inert>
+          <div class="budget-in">
+            <p class="bud-q">Jaki budżet planujesz na automatyzację?</p>
+            <div class="tiles">
+              <label class="tile"><input type="radio" name="budzet_automatyzacja" value="2000–2500 zł"><span><b>2000 – 2500</b><i>zł</i></span></label>
+              <label class="tile"><input type="radio" name="budzet_automatyzacja" value="3500–4000 zł"><span><b>3500 – 4000</b><i>zł</i></span></label>
+            </div>
+            <p class="err">Wybierz budżet na automatyzację.</p>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- FIRMA -->
+      <fieldset class="blk fx" style="--d:.38s" id="bFirm">
+        <legend><span class="k">Firma</span><span class="h">NIP uzupełni nazwę</span></legend>
+        <div class="seg">
+          <label class="chip"><input type="radio" name="ma_firme" value="tak" checked><span>Mam firmę / działalność</span></label>
+          <label class="chip"><input type="radio" name="ma_firme" value="nie"><span>Nie prowadzę działalności</span></label>
+        </div>
+        <div class="company" id="company">
+          <div class="company-in">
+            <div class="field">
+              <label for="nip">NIP <span class="opt">(opcjonalnie)</span></label>
+              <div class="nip-row">
+                <input id="nip" inputmode="numeric" autocomplete="off" maxlength="13" placeholder="np. 123-456-78-90">
+                <button type="button" class="nip-btn" id="nipBtn">Szukaj</button>
+              </div>
+              <p class="nip-status" id="nipStatus" aria-live="polite"></p>
+            </div>
+            <div class="field">
+              <label for="firma">Nazwa firmy / działalności</label>
+              <input id="firma" autocomplete="organization" placeholder="Wpisz lub wyszukaj po NIP">
+            </div>
+          </div>
+        </div>
+        <p class="err" id="eFirm">Podaj nazwę firmy albo zaznacz, że nie prowadzisz działalności.</p>
+      </fieldset>
+
+      <!-- DANE -->
+      <fieldset class="blk fx" style="--d:.46s" id="bContact">
+        <legend><span class="k">Dane kontaktowe</span></legend>
+        <div class="field">
+          <label for="name">Imię i nazwisko</label>
+          <input id="name" autocomplete="name" placeholder="Jan Kowalski">
+        </div>
+        <div class="row2">
+          <div class="field"><label for="phone">Telefon</label><input id="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+48 600 700 800"></div>
+          <div class="field"><label for="email">E-mail</label><input id="email" type="email" inputmode="email" autocomplete="email" placeholder="jan@firma.pl"></div>
+        </div>
+        <p class="hint">Wystarczy telefon albo e-mail.</p>
+        <p class="err" id="eName">Podaj imię i nazwisko.</p>
+        <p class="err" id="eReach">Podaj poprawny numer telefonu lub adres e-mail.</p>
+      </fieldset>
+
+      <!-- GODZINY -->
+      <fieldset class="blk fx" style="--d:.54s" id="bHours">
+        <legend><span class="k">Preferowane godziny kontaktu</span><span class="h">Możesz zaznaczyć kilka</span></legend>
+        <div class="chips" id="hours">
+          <label class="chip"><input type="checkbox" name="godziny" value="8:00–12:00"><span>8:00 – 12:00</span></label>
+          <label class="chip"><input type="checkbox" name="godziny" value="12:00–16:00"><span>12:00 – 16:00</span></label>
+          <label class="chip"><input type="checkbox" name="godziny" value="16:00–20:00"><span>16:00 – 20:00</span></label>
+          <label class="chip chip-any"><input type="checkbox" name="godziny" value="Dowolnie" data-any><span>Dowolnie</span></label>
+        </div>
+        <p class="err" id="eHours">Wybierz godziny albo „Dowolnie”.</p>
+      </fieldset>
+
+      <!-- ZRODLO -->
+      <fieldset class="blk fx" style="--d:.62s" id="bSource">
+        <legend><span class="k">Skąd wiesz o NikPage?</span></legend>
+        <div class="chips">
+          <label class="chip"><input type="radio" name="zrodlo" value="Facebook"><span>Facebook</span></label>
+          <label class="chip"><input type="radio" name="zrodlo" value="Z polecenia znajomego"><span>Z polecenia znajomego</span></label>
+          <label class="chip"><input type="radio" name="zrodlo" value="Wyszukiwarka Google"><span>Wyszukiwarka Google</span></label>
+          <label class="chip"><input type="radio" name="zrodlo" value="Wizytówka"><span>Wizytówka</span></label>
+          <label class="chip"><input type="radio" name="zrodlo" value="Po rozmowie ze mną"><span>Po rozmowie ze mną</span></label>
+        </div>
+        <p class="err" id="eSource">Zaznacz jedną odpowiedź.</p>
+      </fieldset>
+
+      <!-- WIADOMOSC -->
+      <fieldset class="blk fx" style="--d:.7s">
+        <legend><span class="k">Kilka słów o projekcie</span><span class="h">Opcjonalnie</span></legend>
+        <div class="field"><textarea id="msg" rows="4" placeholder="Czym zajmuje się Twoja firma, czego potrzebujesz, czy masz termin?"></textarea></div>
+      </fieldset>
+
+      <div class="fx" style="--d:.76s">
+        <label class="consent"><input type="checkbox" id="consent"><span class="box" aria-hidden="true"></span>Zgadzam się na kontakt w sprawie mojego zapytania i przetwarzanie podanych danych wyłącznie w tym celu.</label>
+        <p class="err" id="eConsent">Zaznacz zgodę, żebym mógł się z Tobą skontaktować.</p>
+        <input type="text" id="hp" name="_gotcha" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true">
+        <button class="submit" type="submit" id="submitBtn">Wyślij zgłoszenie</button>
+        <p class="form-msg" id="formMsg" role="status" aria-live="polite"></p>
+        <p class="note">Odpowiadam w ciągu <b>24 godzin</b></p>
       </div>
-    </div>
-    <div class="field"><label for="message">Opisz swój projekt</label><textarea id="message" name="message" placeholder="Czym zajmuje się Twoja firma i czego oczekujesz od strony?" required></textarea></div>
-    <button type="submit" class="btn-submit">Wyślij zapytanie →</button>
-    <p class="form-note">Wysyłając formularz akceptujesz kontakt w sprawie Twojego zapytania.</p>
-  </form>
+    </form>
+  </main>
 
-  <footer>© 2026 NikPage — Ekskluzywne strony internetowe. Napisz: <a href="mailto:michal.nikielski@nikpage.pl">michal.nikielski@nikpage.pl</a></footer>
+  <section class="done" id="done" hidden>
+    <svg viewBox="0 0 74 74" aria-hidden="true"><circle cx="37" cy="37" r="35"/><path d="M24 38.5l9 9 17-19"/></svg>
+    <h2>Dziękuję, <em>zgłoszenie dotarło</em></h2>
+    <p>Odezwę się w ciągu 24 godzin, w godzinach, które wybrano w formularzu.</p>
+    <a href="index.html">Wróć na stronę</a>
+  </section>
 </div>
 
+<footer>Wolisz od razu? <a href="tel:+48662477772">+48 662 477 772</a> · <a href="mailto:michal.nikielski@nikpage.pl">michal.nikielski@nikpage.pl</a></footer>
+
 <script>
-  var form=document.getElementById('contactForm'), successBox=document.getElementById('formSuccess');
-  var submitBtn=form.querySelector('button[type="submit"]');
-  var emailRe=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  function showMsg(text,isError){
-    successBox.textContent=text;
-    if(isError){successBox.style.background='#7a2530';successBox.style.color='#fff';}
-    else{successBox.style.background='';successBox.style.color='';}
-    successBox.classList.add('show');
-    successBox.scrollIntoView({behavior:'smooth',block:'center'});
-  }
-  form.addEventListener('submit',async function(e){
-    e.preventDefault();
-    var n=document.getElementById('name'),em=document.getElementById('email'),msg=document.getElementById('message');
-    var ok=true;
-    [n,em,msg].forEach(function(f){if(!f.value.trim()){f.style.borderColor='#c0392b';ok=false;}else f.style.borderColor='';});
-    if(!ok){showMsg('⚠️ Uzupełnij wymagane pola: imię, e-mail i opis projektu.',true);return;}
-    if(!emailRe.test(em.value.trim())){em.style.borderColor='#c0392b';showMsg('⚠️ Podaj poprawny adres e-mail (np. jan@firma.pl).',true);return;}
-    var orig=submitBtn.innerHTML; submitBtn.disabled=true; submitBtn.textContent='Wysyłanie…';
-    successBox.classList.remove('show');
-    try{
-      var res=await fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}});
-      if(res.ok){
-        showMsg('✅ Dziękuję! Wiadomość została wysłana — odezwę się wkrótce.',false);
-        form.reset();
-      }else{
-        var data=await res.json().catch(function(){return null;});
-        var detail=(data&&data.errors&&data.errors[0]&&data.errors[0].message)?(' ('+data.errors[0].message+')'):'';
-        showMsg('⚠️ Nie udało się wysłać'+detail+'. Napisz bezpośrednio: michal.nikielski@nikpage.pl',true);
-      }
-    }catch(err){
-      showMsg('⚠️ Nie udało się wysłać. Napisz bezpośrednio: michal.nikielski@nikpage.pl',true);
-    }finally{
-      submitBtn.disabled=false;submitBtn.innerHTML=orig;
-    }
+(function(){
+  'use strict';
+  var form = document.getElementById('leadForm');
+  if(!form) return;
+  function $(id){ return document.getElementById(id); }
+
+  /* ---------- FIRMA / BRAK ---------- */
+  var company = $('company'), nipIn = $('nip'), firmIn = $('firma'), nipStatus = $('nipStatus');
+  var firmAddr = '', foundNip = '', foundAddr = '';   /* ostatni wynik wyszukiwania */
+  function hasFirm(){ return form.querySelector('input[name="ma_firme"]:checked').value === 'tak'; }
+  form.querySelectorAll('input[name="ma_firme"]').forEach(function(r){
+    r.addEventListener('change', function(){
+      company.classList.toggle('off', !hasFirm());
+      clearErr('bFirm', 'eFirm');
+    });
   });
+
+  /* ---------- NIP: suma kontrolna i wyszukiwarka w wykazie podatnikow VAT (MF) ---------- */
+  function nipDigits(){ return nipIn.value.replace(/\D/g, ''); }
+  function nipValid(d){
+    if(!/^\d{10}$/.test(d)) return false;
+    var w = [6,5,7,2,3,4,5,6,7], sum = 0;
+    for(var i=0;i<9;i++) sum += w[i]*(+d[i]);
+    return sum % 11 === +d[9];
+  }
+  function today(){
+    var t = new Date();
+    return t.getFullYear() + '-' + String(t.getMonth()+1).padStart(2,'0') + '-' + String(t.getDate()).padStart(2,'0');
+  }
+  function status(text, kind){ nipStatus.textContent = text; nipStatus.className = 'nip-status' + (kind ? ' ' + kind : ''); }
+
+  var lastNip = '', ctrl = null, nipTimer = 0;
+  function lookup(force){
+    var d = nipDigits();
+    if(!d){ status('', ''); return; }
+    if(d.length !== 10){ if(force) status('NIP ma 10 cyfr.', 'warn'); return; }
+    if(!nipValid(d)){ status('Ten NIP ma błędną sumę kontrolną — sprawdź cyfry.', 'err'); return; }
+    if(d === lastNip && !force) return;
+    lastNip = d;
+    if(ctrl) ctrl.abort();
+    ctrl = new AbortController();
+    var myCtrl = ctrl, timeout = setTimeout(function(){ myCtrl.abort(); }, 9000);
+    status('Szukam firmy w wykazie podatników VAT…', 'busy');
+    fetch('https://wl-api.mf.gov.pl/api/search/nip/' + d + '?date=' + today(), {signal: myCtrl.signal})
+      .then(function(r){ return r.json().then(function(j){ return {ok:r.ok, j:j}; }, function(){ return {ok:false, j:null}; }); })
+      .then(function(res){
+        var s = res.ok && res.j && res.j.result && res.j.result.subject;
+        if(s && s.name){
+          firmIn.value = s.name;
+          firmAddr = s.workingAddress || s.residenceAddress || '';
+          foundNip = d; foundAddr = firmAddr;
+          firmIn.classList.remove('firm-found'); void firmIn.offsetWidth; firmIn.classList.add('firm-found');
+          status('Znaleziono: ' + s.name + (firmAddr ? ' — ' + firmAddr : ''), 'ok');
+          clearErr('bFirm', 'eFirm');
+        }else{
+          firmAddr = '';
+          status('Nie znalazłem tego NIP w wykazie VAT (np. firma zwolniona z VAT). Wpisz nazwę ręcznie.', 'warn');
+        }
+      })
+      .catch(function(err){
+        if(myCtrl !== ctrl) return;              /* zastapione nowszym zapytaniem */
+        lastNip = '';
+        status('Wyszukiwarka jest chwilowo niedostępna. Wpisz nazwę firmy ręcznie.', 'warn');
+      })
+      .then(function(){ clearTimeout(timeout); });
+  }
+  nipIn.addEventListener('input', function(){
+    firmAddr = nipDigits() === foundNip ? foundAddr : '';   /* powrot do znalezionego NIP zachowuje adres */
+    clearTimeout(nipTimer);
+    nipTimer = setTimeout(function(){ lookup(false); }, 450);
+  });
+  $('nipBtn').addEventListener('click', function(){ lookup(true); });
+  nipIn.addEventListener('keydown', function(e){ if(e.key === 'Enter'){ e.preventDefault(); lookup(true); } });
+
+  /* ---------- GODZINY: "Dowolnie" wyklucza pozostale ---------- */
+  var hourBoxes = Array.prototype.slice.call(form.querySelectorAll('input[name="godziny"]'));
+  hourBoxes.forEach(function(b){
+    b.addEventListener('change', function(){
+      if(!b.checked) return;
+      hourBoxes.forEach(function(o){
+        if(o !== b && (b.hasAttribute('data-any') || o.hasAttribute('data-any'))) o.checked = false;
+      });
+      clearErr('bHours', 'eHours');
+    });
+  });
+
+  /* ---------- BLEDY ---------- */
+  function showErr(blockId, errId){ if(blockId) $(blockId).classList.add('bad'); $(errId).classList.add('show'); }
+  function clearErr(blockId, errId){ if(blockId) $(blockId).classList.remove('bad'); $(errId).classList.remove('show'); }
+  form.querySelectorAll('input[name="usluga"]').forEach(function(b){ b.addEventListener('change', function(){ clearErr('bService', 'eService'); syncBudgets(); }); });
+
+  /* BUDZET — blok widoczny tylko przy zaznaczonej usludze; po odznaczeniu wybor sie zeruje */
+  var budgets = Array.prototype.slice.call(form.querySelectorAll('.budget'));
+  function budgetOn(bud){ return checked('usluga').indexOf(bud.getAttribute('data-service')) !== -1; }
+  function syncBudgets(){
+    budgets.forEach(function(bud){
+      var on = budgetOn(bud);
+      bud.classList.toggle('on', on);
+      if(on){ bud.removeAttribute('inert'); }
+      else{
+        bud.setAttribute('inert', '');
+        bud.querySelectorAll('input').forEach(function(i){ i.checked = false; });
+        bud.querySelector('.err').classList.remove('show');
+      }
+    });
+  }
+  budgets.forEach(function(bud){
+    bud.querySelectorAll('input').forEach(function(i){
+      i.addEventListener('change', function(){
+        bud.querySelector('.err').classList.remove('show');
+        if(!form.querySelector('#bService .err.show')) $('bService').classList.remove('bad');
+      });
+    });
+  });
+  function budgetValue(id){ var c = $(id).querySelector('input:checked'); return c ? c.value : ''; }
+  form.querySelectorAll('input[name="zrodlo"]').forEach(function(b){ b.addEventListener('change', function(){ clearErr('bSource', 'eSource'); }); });
+  firmIn.addEventListener('input', function(){ clearErr('bFirm', 'eFirm'); });
+  $('name').addEventListener('input', function(){ $('name').classList.remove('bad-in'); clearErr(null, 'eName'); if(!$('eReach').classList.contains('show')) $('bContact').classList.remove('bad'); });
+  ['phone', 'email'].forEach(function(id){
+    $(id).addEventListener('input', function(){ $('phone').classList.remove('bad-in'); $('email').classList.remove('bad-in'); clearErr(null, 'eReach'); if(!$('eName').classList.contains('show')) $('bContact').classList.remove('bad'); });
+  });
+  $('consent').addEventListener('change', function(){ clearErr(null, 'eConsent'); });
+
+  function checked(name){ return Array.prototype.slice.call(form.querySelectorAll('input[name="' + name + '"]:checked')).map(function(i){ return i.value; }); }
+  var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+  function validate(){
+    var first = null;
+    function fail(blockId, errId, el){ showErr(blockId, errId); if(!first) first = el || $(blockId) || $(errId); }
+
+    if(!checked('usluga').length) fail('bService', 'eService');
+    budgets.forEach(function(bud){
+      if(budgetOn(bud) && !bud.querySelector('input:checked')){
+        $('bService').classList.add('bad');
+        bud.querySelector('.err').classList.add('show');
+        if(!first) first = bud;
+      }
+    });
+    if(hasFirm() && !firmIn.value.trim()) fail('bFirm', 'eFirm', firmIn);
+
+    var name = $('name').value.trim();
+    if(name.length < 3){ $('name').classList.add('bad-in'); fail('bContact', 'eName', $('name')); }
+
+    var phone = $('phone').value.trim(), email = $('email').value.trim();
+    var phoneOk = phone.replace(/\D/g, '').length >= 9;
+    var emailOk = emailRe.test(email);
+    var reachOk = (phone || email) && (!phone || phoneOk) && (!email || emailOk);
+    if(!reachOk){
+      if(phone && !phoneOk || !phone && !email) $('phone').classList.add('bad-in');
+      if(email && !emailOk || !phone && !email) $('email').classList.add('bad-in');
+      fail('bContact', 'eReach', phone && !phoneOk ? $('phone') : $('email'));
+    }
+
+    if(!checked('godziny').length) fail('bHours', 'eHours');
+    if(!checked('zrodlo').length) fail('bSource', 'eSource');
+    if(!$('consent').checked) fail(null, 'eConsent', $('consent').parentNode);
+
+    if(first){
+      first.scrollIntoView({behavior:'smooth', block:'center'});
+      return false;
+    }
+    return true;
+  }
+
+  /* ---------- WYSYLKA (Formspree) ---------- */
+  var btn = $('submitBtn'), msg = $('formMsg');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    msg.textContent = ''; msg.className = 'form-msg';
+    if(!validate()) return;
+
+    var name = $('name').value.trim();
+    var fd = new FormData();
+    fd.append('_subject', 'Nowe zgłoszenie z formularza NikPage — ' + name);
+    fd.append('Usługa', checked('usluga').join(', '));
+    if(budgetValue('budWeb'))  fd.append('Budżet — strona od podstaw', budgetValue('budWeb'));
+    if(budgetValue('budAuto')) fd.append('Budżet — automatyzacja', budgetValue('budAuto'));
+    if(hasFirm()){
+      fd.append('Firma', firmIn.value.trim());
+      if(nipDigits()) fd.append('NIP', nipDigits());
+      if(firmAddr) fd.append('Adres firmy (wykaz VAT)', firmAddr);
+    }else{
+      fd.append('Firma', 'Nie prowadzi działalności');
+    }
+    fd.append('Imię i nazwisko', name);
+    fd.append('Telefon', $('phone').value.trim() || '—');
+    if($('email').value.trim()) fd.append('email', $('email').value.trim());
+    fd.append('Godziny kontaktu', checked('godziny').join(', '));
+    fd.append('Skąd wie o NikPage', checked('zrodlo').join(', '));
+    if($('msg').value.trim()) fd.append('Wiadomość', $('msg').value.trim());
+    fd.append('Zgoda na kontakt', 'tak');
+    fd.append('_gotcha', $('hp').value);
+
+    btn.disabled = true; btn.textContent = 'Wysyłanie…';
+    fetch(form.action, {method:'POST', body:fd, headers:{'Accept':'application/json'}})
+      .then(function(r){
+        if(r.ok){
+          if(typeof gtag === 'function') gtag('event', 'generate_lead', {form:'kontakt'});
+          $('formWrap').hidden = true;
+          $('done').hidden = false;
+          window.scrollTo({top:0, behavior:'smooth'});
+          return;
+        }
+        return r.json().catch(function(){ return null; }).then(function(data){
+          var detail = data && data.errors && data.errors[0] && data.errors[0].message ? ' (' + data.errors[0].message + ')' : '';
+          throw new Error(detail);
+        });
+      })
+      .catch(function(err){
+        msg.className = 'form-msg err-msg';
+        msg.textContent = 'Nie udało się wysłać' + ((err && err.message) || '') + '. Zadzwoń: +48 662 477 772 albo napisz: michal.nikielski@nikpage.pl';
+      })
+      .then(function(){ btn.disabled = false; btn.textContent = 'Wyślij zgłoszenie'; });
+  });
+})();
 </script>
 </body>
 </html>

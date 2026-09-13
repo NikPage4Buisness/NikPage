@@ -980,6 +980,22 @@ body.pre .rise.in{opacity:1;transform:none}
   50%    {box-shadow:0 0 0 12px rgba(203,176,120,0), 0 0 40px rgba(203,176,120,.30)}
 }
 @keyframes ct-sheen{0%{left:-40%}60%,100%{left:130%}}
+.ct-actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px 18px}
+/* drugi przycisk: obrys, bez pulsu — glowna droga to formularz */
+.ct-ghost{
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:15px 32px;border-radius:999px;
+  border:1px solid rgba(203,176,120,.38);color:var(--n-100);
+  font-family:'Montserrat',sans-serif;font-size:.68rem;font-weight:400;
+  letter-spacing:.22em;text-indent:.22em;text-transform:uppercase;
+  transition:border-color .4s var(--ease),color .4s var(--ease),background .4s var(--ease);
+}
+.ct-ghost:hover{border-color:var(--g-400);color:var(--g-400);background:rgba(203,176,120,.06)}
+@media(max-width:700px){
+  .ct-actions{flex-direction:column;align-items:stretch;width:100%;max-width:340px}
+  .ct-cta{padding:15px 16px;letter-spacing:.15em;text-indent:.15em}
+  .ct-ghost{padding:13px 16px}
+}
 .ct-note{font-family:'Montserrat',sans-serif;font-size:.62rem;font-weight:300;letter-spacing:.26em;text-transform:uppercase;color:var(--n-400)}
 .ct-note b{font-weight:400;color:var(--g-400)}
 
@@ -1014,6 +1030,39 @@ body.pre .rise.in{opacity:1;transform:none}
   .ct-fx,.ct-title .ch,.ct-title em,.ct-lead .w{opacity:1;transform:none;filter:none;transition:none}
   .ct-bg i,.ct-cta,.ct-cta::before,.ct-title em,.ct-caret{animation:none}
   .ct-card::before{transform:scaleX(1)}
+}
+
+/* ============================================================
+   TRYB LEKKI (telefony, dotyk) — ten sam wyglad, mniej pracy dla GPU:
+   - zamiast rozmywania calego hero w kazdej klatce: miniatura filmu
+     rozciagnieta na ekran (rozciagniecie samo zmiekcza obraz),
+   - jedwab rysowany w malej rozdzielczosci, bez filtra CSS,
+   - bez pylku i bez rozmyc za przyciskiem menu i plamami kontaktu.
+   ============================================================ */
+#filmSoft{display:none}
+.lite #filmSoft{display:block;position:absolute;inset:0;width:100%;height:100%;z-index:0;opacity:0;pointer-events:none;will-change:opacity}
+.lite .act-stage #hero{filter:none;will-change:transform}
+.lite .hero-ui{will-change:opacity}
+.lite #dust{display:none}
+.lite .reveal-inner .silk{filter:none}
+.lite .reveal-rings i:nth-child(3){display:none}
+.lite .m-burger{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(10,8,7,.8)}
+.lite .ct-bg i{filter:none;will-change:auto}
+.lite .ct-title .ch,.lite .ct-title em{filter:none}
+
+/* ============================================================
+   POLOBROT — MIEKKIE PRZEJSCIE
+   Przy obrocie plyty obok siebie stoja dwa rozne obrazy: ciemny jedwab
+   i jasny film hero. Zeby linia ich nie cięla ostro:
+   - hero przygasa (osobna warstwa nad nim — zmiana krycia nie zmusza
+     przegladarki do ponownego rozmywania filmu),
+   - krawedz plyty rzuca na strone hero szeroki, miekki cien.
+   ============================================================ */
+.reveal-dim{position:absolute;inset:0;z-index:0;background:var(--n-900);opacity:0;pointer-events:none;will-change:opacity}
+.reveal-feather{position:absolute;left:50%;top:50%;transform-origin:50% 0;pointer-events:none;opacity:0;will-change:transform,opacity}
+.reveal-feather i{
+  position:absolute;left:0;right:0;bottom:100%;height:100%;   /* pas po stronie hero, tuz nad linia */
+  background:linear-gradient(to top, rgba(10,8,7,.82) 0%, rgba(10,8,7,.5) 26%, rgba(10,8,7,.18) 60%, rgba(10,8,7,0) 100%);
 }
 
 /* ============================================================
@@ -1078,6 +1127,28 @@ body.pre .rise.in{opacity:1;transform:none}
   #about .ab-photo{float:left;height:clamp(118px,20vh,168px);margin:6px 16px 8px 0}
   #about .ab-text{width:auto}
   #about .ab-facts{clear:both}
+
+  /* zdjecie bez prostokata: krawedzie gasna owalem w tlo, bez obiegajacej ramki */
+  #about .ab-photo::before,#about .ab-photo::after{display:none}
+  #about .ab-frame{
+    background:none;box-shadow:none;
+    -webkit-mask-image:radial-gradient(closest-side, #000 58%, transparent 100%);
+    mask-image:radial-gradient(closest-side, #000 58%, transparent 100%);
+  }
+  #about .ab-frame::after{display:none}
+  /* film: przygaszony i bez widocznych brzegow kadru */
+  #about .about-video{
+    opacity:.5;
+    -webkit-mask-image:radial-gradient(circle closest-side, #000 74%, rgba(0,0,0,.55) 88%, transparent 100%);
+    mask-image:radial-gradient(circle closest-side, #000 74%, rgba(0,0,0,.55) 88%, transparent 100%);
+  }
+  /* rowne przyciemnienie pod calym tekstem i mocniejszy cien liter */
+  #about .about-veil{
+    background:linear-gradient(180deg, rgba(10,8,7,.28) 0%, rgba(10,8,7,.5) 30%, rgba(10,8,7,.5) 78%, rgba(10,8,7,.3) 100%);
+  }
+  #about .ab-text h2,#about .ab-lead,#about .ab-p,#about .ab-facts{
+    text-shadow:0 1px 2px rgba(10,8,7,.95),0 0 16px rgba(10,8,7,.9);
+  }
 }
 
 /* SUWAK TASMY — ten sam kat co przekatna, pod kaflami.
@@ -1595,6 +1666,7 @@ body.entered .hero-stat{animation:nkFade 1.2s var(--ease) 2.95s both}
   .hero-sub{letter-spacing:.2em;text-indent:.2em;max-width:30ch}
   .botbar{flex-direction:column;align-items:flex-start;gap:12px}
   .botbar .bot-item span{font-size:.68rem}
+  .botbar .bot-item[href^="tel:"]{flex-direction:row-reverse}   /* ikona przed numerem, jak przy e-mailu */
 }
 @media(prefers-reduced-motion:reduce){
   #film{transition:none}
@@ -1612,7 +1684,13 @@ body.entered .hero-stat{animation:nkFade 1.2s var(--ease) 2.95s both}
 </head>
 <body>
 
-<script>document.body.className='pre';</script>
+<script>document.body.className='pre';
+/* TRYB LEKKI — telefony i ekrany dotykowe bez myszy: te same sceny, tansze efekty */
+window.NK_LITE = window.matchMedia('(max-width:820px), (hover:none) and (pointer:coarse)').matches;
+if(window.NK_LITE) document.documentElement.classList.add('lite');
+/* ktore warstwy trzeba animowac; ustawia skrypt przyslony, reszta petli spi */
+window.NK_SCENE = {hero:true, silk:false, soft:0, band:0};
+</script>
 
 <!-- MENU NA TELEFON -->
 <button class="m-burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mMenu"><i></i><i></i><i></i></button>
@@ -1637,6 +1715,7 @@ body.entered .hero-stat{animation:nkFade 1.2s var(--ease) 2.95s both}
 
   <!-- FILM (petla) -->
   <canvas id="film"></canvas>
+  <canvas id="filmSoft" aria-hidden="true"></canvas>
   <div id="scrim"></div>
 
   <!-- PYLEK -->
@@ -1698,6 +1777,7 @@ body.entered .hero-stat{animation:nkFade 1.2s var(--ease) 2.95s both}
      naroznika do przekatnej lewy dol -> prawa gora. Linia idzie po samej
      krawedzi ciecia, wiec wyglada, jakby ciagnela kolor za soba. -->
     <div class="reveal" id="reveal">
+      <div class="reveal-dim" aria-hidden="true"></div>
       <!-- TASMA PORTFOLIO — obrocona do kata przekatnej, przesuwalna
            w nieskonczonej petli. Wystaje poza kadr i jest przycinana. -->
       <div class="strip" id="strip">
@@ -1720,6 +1800,8 @@ body.entered .hero-stat{animation:nkFade 1.2s var(--ease) 2.95s both}
           <div class="reveal-rings"><i></i><i></i><i></i></div>
         </div>
       </div>
+      <!-- miekki cien krawedzi plyty po stronie hero (widoczny przy polobrocie) -->
+      <div class="reveal-feather" aria-hidden="true"><i></i></div>
       <!-- linia osobno, zeby jej poswiata nie byla obcinana krawedzia plyty -->
       <div class="reveal-edge" aria-hidden="true"><b></b></div>
 
@@ -1798,7 +1880,10 @@ body.entered .hero-stat{animation:nkFade 1.2s var(--ease) 2.95s both}
               <button class="ct-copy" type="button">Kopiuj adres</button>
             </div>
           </div>
-          <a class="ct-cta ct-fx d4" href="mailto:michal.nikielski@nikpage.pl?subject=Rozmowa%20o%20stronie">Umów rozmowę</a>
+          <div class="ct-actions ct-fx d4">
+            <a class="ct-cta" href="kontakt.html">Wypełnij formularz kontaktowy</a>
+            <a class="ct-ghost" href="mailto:michal.nikielski@nikpage.pl?subject=Rozmowa%20o%20stronie">Umów rozmowę</a>
+          </div>
           <p class="ct-note ct-fx d5">Odpowiadam w ciągu <b>24 godzin</b></p>
         </div>
       </div>
@@ -1843,6 +1928,13 @@ body.entered .hero-stat{animation:nkFade 1.2s var(--ease) 2.95s both}
 
   var canvas = document.getElementById('film');
   var ctx = canvas.getContext('2d');
+  var LITE  = !!window.NK_LITE;
+  var scene = window.NK_SCENE || (window.NK_SCENE = {hero:true, silk:false, soft:0, band:0});
+  /* telefon: miniatura filmu zamiast rozmycia CSS; posredni krok 1/4 wygladza zmniejszenie */
+  var soft = document.getElementById('filmSoft');
+  var sctx = LITE && soft ? soft.getContext('2d') : null;
+  var mid  = sctx ? document.createElement('canvas') : null, mctx = mid ? mid.getContext('2d') : null;
+  var rsW = window.innerWidth, rsH = window.innerHeight;
   var frames = new Array(FRAME_COUNT);
   var loaded = 0;
 
@@ -1858,6 +1950,10 @@ body.entered .hero-stat{animation:nkFade 1.2s var(--ease) 2.95s both}
     canvas.height = Math.max(1, Math.round(h*dpr));
     ctx.setTransform(dpr,0,0,dpr,0,0);
     cssW = w; cssH = h;
+    if(sctx){
+      mid.width  = Math.max(8, Math.round(w/4));  mid.height  = Math.max(8, Math.round(h/4));
+      soft.width = Math.max(4, Math.round(w/14)); soft.height = Math.max(4, Math.round(h/14));
+    }
   }
   var cssW = 0, cssH = 0;
   sizeCanvas();
@@ -1875,8 +1971,16 @@ body.entered .hero-stat{animation:nkFade 1.2s var(--ease) 2.95s both}
     if(canvas.width===0)sizeCanvas();
     var scale = Math.max(cssW/img.width, cssH/img.height);
     var w = img.width*scale, h = img.height*scale;
-    ctx.clearRect(0,0,cssW,cssH);
-    ctx.drawImage(img,(cssW-w)/2,(cssH-h)/2,w,h);
+    /* ostry film pod calkiem kryjaca miniatura i tak nie jest widoczny */
+    if(!(sctx && scene.soft > 0.97)){
+      ctx.clearRect(0,0,cssW,cssH);
+      ctx.drawImage(img,(cssW-w)/2,(cssH-h)/2,w,h);
+    }
+    if(sctx && scene.soft > 0.01){
+      var ms = mid.width/cssW;
+      mctx.drawImage(img,(cssW-w)/2*ms,(cssH-h)/2*ms,w*ms,h*ms);
+      sctx.drawImage(mid,0,0,soft.width,soft.height);
+    }
   }
 
   function loadFrame(i,cb){
@@ -1899,17 +2003,29 @@ body.entered .hero-stat{animation:nkFade 1.2s var(--ease) 2.95s both}
     if(f!==lastDrawn){drawFrame(f);lastDrawn=f;}
   }
 
+  var running = false, lastDrawT = 0;
   function tick(t){
-    if(!started)return;
+    if(!started){ running = false; return; }
+    if(!scene.hero){ running = false; lastT = 0; return; }   /* hero zakryte — petla spi */
     if(!lastT)lastT = t;
     var dt = t-lastT; lastT = t;
     if(dt>200)dt = 200;         /* powrot z tla nie ma robic przeskoku */
     pos += dir*(dt/PASS_MS);
     if(pos>=1){pos=1;dir=-1;}
     else if(pos<=0){pos=0;dir=1;}
-    drawAtPos();
+    if(!LITE || t - lastDrawT >= 30){ drawAtPos(); lastDrawT = t; }   /* telefon: ok. 30 kl./s */
     requestAnimationFrame(tick);
   }
+  function wake(){
+    if(!started || running || reduceMotion || !scene.hero) return;
+    running = true; lastT = 0;
+    requestAnimationFrame(tick);
+  }
+  window.addEventListener('nk:scene', function(){
+    lastDrawn = -1;                       /* np. wlaczyla sie miniatura — dorysuj ja */
+    if(reduceMotion){ if(scene.hero) drawAtPos(); return; }
+    wake();
+  });
 
   function start(){
     if(started)return;
@@ -1917,7 +2033,7 @@ body.entered .hero-stat{animation:nkFade 1.2s var(--ease) 2.95s both}
     canvas.classList.add('ready');
     drawAtPos();
     if(reduceMotion)return;   /* bez ruchu: statyczna pierwsza klatka */
-    requestAnimationFrame(tick);
+    wake();
   }
 
   /* pauza gdy karta w tle — nie marnujemy CPU */
@@ -1927,6 +2043,9 @@ body.entered .hero-stat{animation:nkFade 1.2s var(--ease) 2.95s both}
 
   var resizeTimer;
   window.addEventListener('resize',function(){
+    /* pasek adresu na telefonie zmienia tylko wysokosc okna — film ma stala wysokosc */
+    if(LITE && window.innerWidth === rsW && Math.abs(window.innerHeight - rsH) < 160) return;
+    rsW = window.innerWidth; rsH = window.innerHeight;
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(function(){sizeCanvas();lastDrawn=-1;drawAtPos();},150);
   });
@@ -2365,6 +2484,13 @@ body.entered .hero-stat{animation:nkFade 1.2s var(--ease) 2.95s both}
   var edge   = reveal.querySelector('.reveal-edge');
   var rings  = reveal.querySelector('.reveal-rings');
   var silk   = reveal.querySelector('.silk');
+  var dimEl  = reveal.querySelector('.reveal-dim'), feather = reveal.querySelector('.reveal-feather');
+  var LITE   = !!window.NK_LITE;
+  var scene  = window.NK_SCENE || (window.NK_SCENE = {hero:true, silk:false, soft:0, band:0});
+  var heroEl = document.getElementById('hero'), heroUi = heroEl && heroEl.querySelector('.hero-ui');
+  var filmSoft = document.getElementById('filmSoft');
+  var lastHeroT = '', lastHeroF = '', lastUiO = '', lastSoftO = '';
+  var rsW = window.innerWidth, rsH = window.innerHeight;
   var qbox   = reveal.querySelector('.reveal-quote');
   var quote  = reveal.querySelector('.quote-text');
   var shell  = stage.querySelector('.nav-shell');
@@ -2435,10 +2561,14 @@ body.entered .hero-stat{animation:nkFade 1.2s var(--ease) 2.95s both}
     /* szerokosc: krawedz musi wystawac poza scene przy kazdym obrocie
        wysokosc: polplaszczyzna musi pokryc scene. Nic ponadto — te
        elementy sa na warstwie kompozytora i kazdy zbedny piksel kosztuje. */
-    var SW = Math.ceil(DIAG*2.1), SH = Math.ceil(DIAG*1.1);
+    /* telefon: plyta tylko tak duza, jak wymaga geometria — linia przez srodek,
+       a najdalszy punkt ekranu lezy pol przekatnej od srodka. Mniej pamieci GPU. */
+    var SW = LITE ? Math.ceil(DIAG*1.04) + 8 : Math.ceil(DIAG*2.1);
+    var SH = LITE ? Math.ceil(DIAG*0.52) + 8 : Math.ceil(DIAG*1.1);
 
     slab.style.width = SW+'px';  slab.style.height = SH+'px';
-    edge.style.width = SW+'px';  edge.style.height = SH+'px';
+    edge.style.width = Math.ceil(DIAG*2.1)+'px';  edge.style.height = '2px';   /* sama linia — wysoka warstwa niepotrzebna */
+    if(feather){ feather.style.width = SW+'px'; feather.style.height = Math.round(Math.min(H*0.62, 560))+'px'; }
     inner.style.width = W+'px';  inner.style.height = H+'px';
 
     NAVW = shell ? shell.offsetWidth : 0;
@@ -2486,12 +2616,17 @@ body.entered .hero-stat{animation:nkFade 1.2s var(--ease) 2.95s both}
       var tb = about.querySelector('.ab-text'), inn = about.querySelector('.about-inner');
       var facts = about.querySelector('.ab-facts');
       if(aboutVideo && tb && inn && tb.offsetHeight){
+        var narrowRing = W < 821;
         var top    = inn.offsetTop + tb.offsetTop;
+        /* telefon: pierscien dopiero pod zdjeciem — nie przechodzi za nim,
+           wiec nie odrysowuje jego prostokata */
+        var phEl = about.querySelector('.ab-photo');
+        if(narrowRing && phEl) top = Math.max(top, inn.offsetTop + phEl.offsetTop + phEl.offsetHeight + 14);
         var bottom = facts ? inn.offsetTop + facts.offsetTop - 18 : top + tb.offsetHeight;
         var regionH = Math.max(120, bottom - top);
-        var ringD = Math.min(regionH*0.92, tb.offsetWidth*0.9);
+        var ringD = Math.min(regionH*0.92, narrowRing ? W*0.86 : tb.offsetWidth*0.9);
         var vh = ringD/0.84, vw = vh*16/9;
-        var tcx = inn.offsetLeft + tb.offsetLeft + tb.offsetWidth/2;
+        var tcx = narrowRing ? W/2 : inn.offsetLeft + tb.offsetLeft + tb.offsetWidth/2;
         var tcy = top + regionH/2;
         aboutVideo.style.width  = vw.toFixed(0) + 'px';
         aboutVideo.style.height = vh.toFixed(0) + 'px';
@@ -2826,7 +2961,7 @@ body.entered .hero-stat{animation:nkFade 1.2s var(--ease) 2.95s both}
       aboutVideo.dataset.loaded = '1';
     }
     var shouldPlay = !reduceMotion && aboutVideo.dataset.loaded &&
-                     p >= SWEEP_AT - 0.01 && p < CT_OPEN_END + 0.02;   /* pod kontaktem juz nie gra */
+                     p >= (LITE ? SWEEP_END - 0.03 : SWEEP_AT - 0.01) && p < CT_OPEN_END + 0.02;   /* telefon: film rusza po odslonieciu */   /* pod kontaktem juz nie gra */
     if(shouldPlay && aboutVideo.paused){
       var pr = aboutVideo.play();
       if(pr && pr.catch) pr.catch(function(){});
@@ -2890,7 +3025,7 @@ body.entered .hero-stat{animation:nkFade 1.2s var(--ease) 2.95s both}
 
     /* KAFLE, SUWAK, CYTAT — gasna, gdy przekatna rusza w polobrot */
     var tin   = seg(p,TILES_AT,TILES_END);
-    var tfade = 1 - seg(p,TURN_AT,TURN_AT+0.07);
+    var tfade = 1 - seg(p,TURN_AT-0.015,TURN_AT+0.035);   /* gasna, zanim linia przejedzie nad hero */
     var live  = tin > 0.99 && p < TURN_AT;
     strip.style.opacity = tfade.toFixed(3);
     strip.classList.toggle('on', live);
@@ -2925,11 +3060,36 @@ body.entered .hero-stat{animation:nkFade 1.2s var(--ease) 2.95s both}
     silk.style.opacity  = (0.92 - cross*0.70).toFixed(3);
     rings.style.opacity = (seg(p, TURN_AT+0.08, SEC3_AT+0.05)*0.55).toFixed(3);
 
+    /* MIEKKIE PRZEJSCIE — narasta tuz przed polobrotem i zostaje pod uslugami
+       (dalej i tak zakrywa je O mnie); cien jedzie razem z plyta */
+    var soft = seg(p, TURN_AT - 0.02, TURN_AT + 0.05);
+    if(dimEl) dimEl.style.opacity = (soft*0.38).toFixed(3);
+    if(feather){
+      feather.style.opacity   = (soft*0.9).toFixed(3);
+      feather.style.transform = slab.style.transform;
+    }
+
     if(!reduceMotion){
       /* hero rozmywa sie przy portfolio, a przy polobrocie wraca do ostrosci */
-      var b = wipe*MAX_BLUR - seg(p,TURN_AT,TURN_END)*(MAX_BLUR - 5);
-      stage.style.setProperty('--hero-blur', Math.max(0,b).toFixed(2) + 'px');
-      stage.style.setProperty('--hero-scale', (1 + wipe*0.05 - turn*0.03).toFixed(4));
+      var b = wipe*MAX_BLUR - seg(p,TURN_AT,TURN_END)*(MAX_BLUR - 9);   /* przy uslugach zostaje lekko rozmyte */
+      b = Math.max(0, b);
+      /* styl wprost na hero zamiast zmiennej na calej scenie — przegladarka nie
+         przelicza stylow wszystkich sekcji w kazdej klatce; zapis tylko przy zmianie */
+      if(heroEl){
+        var hT = 'scale(' + (1 + wipe*0.05 - turn*0.03).toFixed(4) + ')';
+        if(hT !== lastHeroT){ heroEl.style.transform = hT; lastHeroT = hT; }
+        if(LITE){
+          /* telefon: zamiast filtra — przejscie do miniatury filmu i wygaszenie napisow hero */
+          var sv = Math.min(1, b/6);
+          scene.soft = sv;
+          var sO = sv.toFixed(3), uO = (1 - sv).toFixed(3);
+          if(filmSoft && sO !== lastSoftO){ filmSoft.style.opacity = sO; lastSoftO = sO; }
+          if(heroUi && uO !== lastUiO){ heroUi.style.opacity = uO; lastUiO = uO; }
+        }else{
+          var hF = b < 0.05 ? 'none' : 'blur(' + b.toFixed(2) + 'px)';
+          if(hF !== lastHeroF){ heroEl.style.filter = hF; lastHeroF = hF; }
+        }
+      }
     }
 
     /* SKROTY — przy polobrocie chowaja sie w lewo i wracaja z prawej */
@@ -2972,6 +3132,16 @@ body.entered .hero-stat{animation:nkFade 1.2s var(--ease) 2.95s both}
       contact.classList.toggle('live', p >= CT_OPEN_END - 0.01);
     }
 
+    /* KTORE PETLE MAJA PRACOWAC — hero i jedwab spia, gdy O mnie albo kontakt
+       zakrywa caly ekran; jedwab spi tez na samym hero (plyta poza kadrem) */
+    var heroOn = p < SWEEP_END + 0.005;
+    var silkOn = p > 0.002 && p < SWEEP_END + 0.005;
+    var band   = LITE ? (scene.soft > 0.97 ? 2 : (scene.soft > 0.01 ? 1 : 0)) : 0;
+    if(heroOn !== scene.hero || silkOn !== scene.silk || band !== scene.band){
+      scene.hero = heroOn; scene.silk = silkOn; scene.band = band;
+      window.dispatchEvent(new Event('nk:scene'));
+    }
+
     aboutVideoState(p);
   }
 
@@ -2991,6 +3161,8 @@ body.entered .hero-stat{animation:nkFade 1.2s var(--ease) 2.95s both}
   window.addEventListener('scroll',request,{passive:true});
   var rt;
   window.addEventListener('resize',function(){
+    if(LITE && window.innerWidth === rsW && Math.abs(window.innerHeight - rsH) < 160) return;   /* pasek adresu — scena (svh) sie nie zmienia */
+    rsW = window.innerWidth; rsH = window.innerHeight;
     clearTimeout(rt);rt=setTimeout(function(){measure();request();},160);
   });
   request();
@@ -3010,7 +3182,12 @@ body.entered .hero-stat{animation:nkFade 1.2s var(--ease) 2.95s both}
   if(!c)return;
   var ctx = c.getContext('2d');
   var reduceMotion = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
-  var dpr = Math.min(window.devicePixelRatio||1, 1.5);   /* i tak rozmywamy — po co wiecej */
+  var LITE  = !!window.NK_LITE;
+  var scene = window.NK_SCENE || (window.NK_SCENE = {hero:true, silk:false, soft:0, band:0});
+  var rsW = window.innerWidth, rsH = window.innerHeight;
+  /* komputer: rozmycie robi CSS. Telefon: male plotno rozciagniete na ekran
+     samo zmiekcza fale, a filtr CSS na calym ekranie znika */
+  var dpr = LITE ? 0.16 : Math.min(window.devicePixelRatio||1, 1.5);   /* i tak rozmywamy — po co wiecej */
   var W=0, H=0;
 
   /* y, grubosc, amplitudy i okresy fal, tempa, kolory */
@@ -3028,9 +3205,10 @@ body.entered .hero-stat{animation:nkFade 1.2s var(--ease) 2.95s both}
     c.width  = Math.max(1,Math.round(W*dpr));
     c.height = Math.max(1,Math.round(H*dpr));
     ctx.setTransform(dpr,0,0,dpr,0,0);
+    if(LITE && 'filter' in ctx) ctx.filter = 'blur(1.5px)';   /* tanie: plotno ma kilkadziesiat pikseli */
   }
 
-  var STEPS = 44;
+  var STEPS = LITE ? 20 : 44;
   function ribbon(r,t){
     ctx.beginPath();
     var i,u,x,y;
@@ -3060,7 +3238,13 @@ body.entered .hero-stat{animation:nkFade 1.2s var(--ease) 2.95s both}
   }
 
   var raf = 0, visible = true;
-  function loop(){draw();raf = requestAnimationFrame(loop);}
+  var lastT = 0;
+  function loop(t){
+    if(!scene.silk){ raf = 0; return; }                /* plyta poza kadrem albo zakryta — spi */
+    if(!LITE || !t || t - lastT >= 30){ draw(); lastT = t || 0; }   /* telefon: ok. 30 kl./s */
+    raf = requestAnimationFrame(loop);
+  }
+  window.addEventListener('nk:scene', function(){ if(scene.silk && !raf && !reduceMotion) loop(); });
 
   size();
   draw();                       /* pierwsza klatka od razu */
@@ -3079,6 +3263,8 @@ body.entered .hero-stat{animation:nkFade 1.2s var(--ease) 2.95s both}
 
   var rt;
   window.addEventListener('resize',function(){
+    if(LITE && window.innerWidth === rsW && Math.abs(window.innerHeight - rsH) < 160) return;
+    rsW = window.innerWidth; rsH = window.innerHeight;
     clearTimeout(rt);rt=setTimeout(function(){size();draw();},180);
   });
 })();
@@ -3223,7 +3409,7 @@ body.entered .hero-stat{animation:nkFade 1.2s var(--ease) 2.95s both}
       ctx.fillStyle = 'rgba('+rgb+','+a.toFixed(3)+')';
       ctx.fill();
     }
-    raf = requestAnimationFrame(draw);
+    raf = (window.NK_SCENE && !window.NK_SCENE.hero) ? 0 : requestAnimationFrame(draw);   /* hero zakryte — spi */
   }
 
   var resizeTimer;
@@ -3243,10 +3429,14 @@ body.entered .hero-stat{animation:nkFade 1.2s var(--ease) 2.95s both}
     }
   }
 
+  if(window.NK_LITE) return;             /* telefon: bez pylku (plotno ukryte w CSS) */
   size(); seed();
   /* pierwsza klatka od razu, nie czekamy na rAF */
   if(reduceMotion){drawStatic();}
   else{draw();}
+  window.addEventListener('nk:scene', function(){
+    if(window.NK_SCENE.hero && !raf && !reduceMotion) draw();
+  });
 })();
 
 (function(){
@@ -3270,6 +3460,15 @@ body.entered .hero-stat{animation:nkFade 1.2s var(--ease) 2.95s both}
   var QUIET   = 180;
 
   if('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
+  /* wejscie z innej podstrony z kotwica (np. kontakt.html -> index.html#kontakt):
+     od razu na przystanek, bez przewijania przez cala strone */
+  window.addEventListener('load', function(){
+    var id = location.hash.slice(1);
+    if(!id || !Object.prototype.hasOwnProperty.call(ANCHORS, id)) return;
+    var list = stops();
+    window.scrollTo(0, list[Math.min(ANCHORS[id], list.length - 1)]);
+  });
 
   function maxScroll(){ return Math.max(0, document.documentElement.scrollHeight - window.innerHeight); }
 
