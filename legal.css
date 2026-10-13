@@ -1,6 +1,6 @@
 /* ============================================================
-   NIKPAGE — PODSTRONY INFORMACYJNE (polityka prywatnosci, dostepnosc)
-   Ta sama paleta co strona glowna. Bez animacji tla — dokument ma
+   NIKPAGE - PODSTRONY INFORMACYJNE (polityka prywatnosci, dostepnosc)
+   Ta sama paleta co strona glowna. Bez animacji tla - dokument ma
    sie wygodnie czytac i szybko ladowac.
    ============================================================ */
 :root{
@@ -27,7 +27,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--g-300);outline-offs
     radial-gradient(60% 45% at 105% 85%, rgba(184,148,78,.08) 0%, rgba(184,148,78,0) 70%),
     linear-gradient(180deg,#14100E 0%,#0A0807 100%)}
 
-/* odnosnik "przejdz do tresci" — widoczny dopiero przy nawigacji klawiatura */
+/* odnosnik "przejdz do tresci" - widoczny dopiero przy nawigacji klawiatura */
 .skip{position:absolute;left:12px;top:-80px;z-index:10;padding:10px 16px;border-radius:4px;
   background:var(--g-500);color:var(--n-900);font-size:.8rem;font-weight:500;text-decoration:none}
 .skip:focus{top:12px}

@@ -1,5 +1,5 @@
 /* ============================================================
-   NIKPAGE — ZGODA NA PLIKI COOKIE (Google Analytics)
+   NIKPAGE - ZGODA NA PLIKI COOKIE (Google Analytics)
    Statystyki wlaczaja sie dopiero po zgodzie. Wybor jest zapisany
    w localStorage ('nk-consent'). Zmiana w kazdej chwili: dowolny
    element z atrybutem data-cookie-settings otwiera okienko ponownie.
@@ -9,7 +9,7 @@
   var GA_ID = 'G-S2J18H7SKJ';
   var KEY   = 'nk-consent';
 
-  /* kolejka gtag istnieje zawsze — zdarzenia bez zgody nigdzie nie wychodza */
+  /* kolejka gtag istnieje zawsze - zdarzenia bez zgody nigdzie nie wychodza */
   window.dataLayer = window.dataLayer || [];
   if(typeof window.gtag !== 'function'){ window.gtag = function(){ window.dataLayer.push(arguments); }; }
 
