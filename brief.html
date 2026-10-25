@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google Analytics (GA4) - wlacza sie dopiero po zgodzie na pliki cookie -->
+<script src="consent.js" defer></script>
+<title>NikPage - Brief projektowy</title>
+<meta name="description" content="Brief projektowy strony internetowej NikPage. Na jego podstawie przygotuję wycenę, zakres i harmonogram strony.">
+<meta name="author" content="Michał Nikielski - NikPage">
+<!-- brief wysylam klientom linkiem - nie musi byc w Google -->
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://www.nikpage.pl/brief.html">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="NikPage">
+<meta property="og:title" content="NikPage - Brief projektowy">
+<meta property="og:description" content="Kilkanaście pytań o Twoją firmę i stronę. Na ich podstawie przygotuję wycenę, zakres i harmonogram.">
+<meta property="og:url" content="https://www.nikpage.pl/brief.html">
+<meta property="og:image" content="https://www.nikpage.pl/assets/og-image.jpg">
+<meta property="og:locale" content="pl_PL">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200..600&family=Playfair+Display:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   NIKPAGE - BRIEF PROJEKTOWY
+   Ta sama paleta i komponenty co kontakt.html. Lekkie efekty
+   (przesuniecia i krycie), zeby na telefonie nic nie przycinalo.
+   ============================================================ */
+:root{
+  --n-900:#0A0807; --n-800:#14100E; --n-700:#1A1512; --n-600:#28201A;
+  --n-500:#7D7268; --n-400:#9E9088; --n-300:#C8BFB0; --n-100:#F4F0EA;
+  --g-500:#B8944E; --g-400:#CBB078; --g-300:#E4CC96;
+  --w-500:#7F1D1D; --w-600:#7A2530; --w-400:#C0392B;
+  --font-serif:'Playfair Display',Georgia,'Times New Roman',serif;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:24px}
+body{
+  font-family:'Montserrat',-apple-system,BlinkMacSystemFont,sans-serif;font-weight:300;
+  background:var(--n-800);color:var(--n-100);line-height:1.6;
+  min-height:100vh;overflow-x:clip;-webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--w-500);color:var(--n-100)}
+button,input,textarea{font:inherit;color:inherit}
+
+/* ---------- pasek postepu ---------- */
+.progress{position:fixed;top:0;left:0;right:0;height:3px;z-index:20;background:rgba(203,176,120,.08)}
+.progress i{display:block;height:100%;width:100%;transform-origin:left center;transform:scaleX(0);
+  background:linear-gradient(90deg,var(--w-500),var(--g-400) 70%,var(--g-300));transition:transform .5s var(--ease)}
+
+/* ---------- tlo ---------- */
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;
+  background:
+    radial-gradient(90% 55% at 50% -8%, rgba(127,29,29,.34) 0%, rgba(127,29,29,0) 70%),
+    linear-gradient(180deg,#14100E 0%,#0A0807 100%)}
+.bg i{position:absolute;border-radius:50%;will-change:transform}
+.bg i:nth-child(1){width:70vmax;height:70vmax;left:-30vmax;top:30vh;
+  background:radial-gradient(circle,rgba(184,148,78,.13) 0%,rgba(184,148,78,0) 62%);
+  animation:drift1 24s ease-in-out infinite alternate}
+.bg i:nth-child(2){width:60vmax;height:60vmax;right:-28vmax;top:-10vh;
+  background:radial-gradient(circle,rgba(127,29,29,.30) 0%,rgba(127,29,29,0) 62%);
+  animation:drift2 28s ease-in-out infinite alternate}
+@keyframes drift1{to{transform:translate(12vmax,-8vmax)}}
+@keyframes drift2{to{transform:translate(-10vmax,14vmax)}}
+
+.page{position:relative;z-index:1;max-width:780px;margin:0 auto;padding:22px clamp(18px,5vw,40px) 64px}
+
+/* ---------- gora ---------- */
+.top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:clamp(34px,7vh,64px)}
+.brand{display:flex;align-items:center;gap:12px;font-family:var(--font-serif);font-size:1.15rem;letter-spacing:.04em}
+.brand img{width:34px;height:auto}
+.brand sup{font-size:.5em;color:var(--g-400)}
+.back{
+  display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:999px;
+  border:1px solid rgba(203,176,120,.3);
+  font-size:.66rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:var(--n-300);
+  transition:border-color .4s var(--ease),color .4s var(--ease)}
+.back:hover{border-color:var(--g-400);color:var(--g-400)}
+
+/* ---------- naglowek ---------- */
+.head{margin-bottom:clamp(30px,5vh,48px)}
+.over{display:inline-block;font-size:.64rem;font-weight:400;letter-spacing:.34em;text-transform:uppercase;color:var(--g-500);margin-bottom:16px}
+h1{font-family:var(--font-serif);font-weight:300;font-size:clamp(2.1rem,6.4vw,3.7rem);line-height:1.08;margin-bottom:18px}
+h1 em{
+  font-style:italic;
+  background:linear-gradient(100deg,var(--g-500) 0%,var(--g-400) 35%,var(--g-300) 47%,#F4F0EA 50%,var(--g-300) 53%,var(--g-400) 65%,var(--g-500) 100%);
+  background-size:260% 100%;
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
+  animation:shine 6s linear infinite}
+@keyframes shine{from{background-position:100% 0}to{background-position:-160% 0}}
+.lead{font-family:var(--font-serif);font-size:clamp(1rem,2.6vw,1.18rem);line-height:1.6;color:var(--n-300);max-width:56ch}
+.how{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:18px;font-size:.78rem;color:var(--n-400)}
+.how span::before{content:"";display:inline-block;width:5px;height:5px;margin-right:9px;border-radius:50%;background:var(--g-500);vertical-align:2px}
+.rule{position:relative;height:2px;margin-top:28px;overflow:hidden}
+.rule::before{content:"";position:absolute;inset:0;transform-origin:left center;
+  background:linear-gradient(90deg,rgba(228,204,150,0),rgba(244,240,234,1) 30%,rgba(228,204,150,.6) 70%,rgba(228,204,150,0));
+  animation:draw 1.4s var(--ease) .35s both}
+@keyframes draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+/* przywrocony szkic */
+.draft{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 16px;
+  margin-bottom:28px;padding:14px 18px;border-radius:4px;border:1px solid rgba(203,176,120,.3);
+  background:rgba(26,21,18,.7);font-size:.8rem;color:var(--n-300)}
+.draft[hidden]{display:none}
+.draft button{background:none;border:0;cursor:pointer;font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--g-400);text-decoration:underline;text-underline-offset:4px}
+
+/* ---------- wejscia ---------- */
+.fx{animation:up .9s var(--ease) both;animation-delay:var(--d,0s)}
+@keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+/* ---------- sekcje ---------- */
+fieldset{border:0;min-width:0}
+.sec{margin-bottom:clamp(40px,6vh,58px)}
+.sec legend{display:flex;align-items:baseline;gap:16px;width:100%;padding-bottom:14px;margin-bottom:10px;border-bottom:1px solid rgba(184,148,78,.2)}
+.num{font-family:var(--font-serif);font-style:italic;font-size:1.5rem;line-height:1;color:var(--g-500)}
+.ttl{font-size:.74rem;font-weight:500;letter-spacing:.26em;text-transform:uppercase;color:var(--g-400)}
+.sec-note{font-family:var(--font-serif);font-size:.98rem;line-height:1.55;color:var(--n-300);margin:6px 0 20px}
+.sec.key legend{border-bottom-color:rgba(203,176,120,.5)}
+.sec.bad legend{border-bottom-color:rgba(192,57,43,.7)}
+
+/* pytania */
+.q{margin-bottom:22px}
+.q > label,.q > .ql{display:block;font-size:.9rem;font-weight:400;line-height:1.45;color:var(--n-100);margin-bottom:10px}
+.q .opt{font-weight:300;color:var(--n-500)}
+.q .req{color:var(--g-400)}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:.66rem;font-weight:400;letter-spacing:.18em;text-transform:uppercase;color:var(--n-400);margin-bottom:8px}
+.q input[type=text],.q input[type=tel],.q input[type=email],.q input[type=date],.q textarea,.field input,.trow input[type=text]{
+  display:block;width:100%;padding:14px 16px;border-radius:4px;
+  font-size:16px;                          /* 16 px: iPhone nie powieksza strony przy wpisywaniu */
+  background:rgba(20,16,14,.72);border:1px solid rgba(244,240,234,.12);color:var(--n-100);
+  transition:border-color .35s var(--ease),box-shadow .35s var(--ease)}
+.q textarea{resize:none;overflow:hidden;min-height:56px;line-height:1.5}
+.q input::placeholder,.q textarea::placeholder,.field input::placeholder,.trow input::placeholder{color:var(--n-500)}
+.q input:focus,.q textarea:focus,.field input:focus,.trow input:focus{outline:none;border-color:var(--g-500);box-shadow:0 0 0 3px rgba(184,148,78,.16)}
+input[type=date]{color-scheme:dark}
+.bad-in{border-color:var(--w-400) !important}
+.row3{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:0 12px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
+.sub{font-size:.7rem;font-weight:400;letter-spacing:.24em;text-transform:uppercase;color:var(--n-400);margin:6px 0 12px}
+
+/* chipy (checkbox / radio) */
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{position:relative;cursor:pointer}
+.chip input{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
+.chip span{
+  display:inline-flex;align-items:center;min-height:44px;padding:10px 18px;border-radius:999px;
+  border:1px solid rgba(203,176,120,.24);background:rgba(26,21,18,.5);
+  font-size:.84rem;color:var(--n-300);
+  transition:background .35s var(--ease),border-color .35s var(--ease),color .35s var(--ease),box-shadow .35s var(--ease)}
+.chip:hover span{border-color:rgba(228,204,150,.5);color:var(--n-100)}
+.chip input:checked + span{background:rgba(127,29,29,.62);border-color:var(--g-400);color:var(--n-100);box-shadow:0 0 18px rgba(203,176,120,.16)}
+.chip input:focus-visible + span,.consent input:focus-visible + .box{outline:2px solid var(--g-300);outline-offset:3px}
+.chips + input,.chips + textarea{margin-top:12px}
+
+/* tabela tresci (sekcja 8) */
+.trows{display:grid;gap:10px}
+.trow{display:grid;grid-template-columns:minmax(0,1.3fr) auto minmax(0,1fr);align-items:center;gap:10px 14px;
+  padding:12px 14px;border-radius:4px;background:rgba(26,21,18,.5);border:1px solid rgba(203,176,120,.1)}
+.trow .el{font-size:.86rem;color:var(--n-100)}
+.trow .chips{gap:6px;flex-wrap:nowrap}
+.trow .chip span{min-height:38px;padding:7px 14px;font-size:.78rem}
+.trow input[type=text]{padding:10px 12px}
+.thead{display:grid;grid-template-columns:minmax(0,1.3fr) auto minmax(0,1fr);gap:14px;padding:0 15px 2px;
+  font-size:.6rem;font-weight:400;letter-spacing:.22em;text-transform:uppercase;color:var(--n-500)}
+.thead span:nth-child(2){min-width:186px}
+
+/* zasady */
+.rules{list-style:none;margin:4px 0 22px;counter-reset:r}
+.rules li{position:relative;padding:10px 0 10px 40px;font-size:.88rem;line-height:1.55;color:var(--n-300);border-bottom:1px solid rgba(244,240,234,.06)}
+.rules li::before{counter-increment:r;content:counter(r,decimal-leading-zero);position:absolute;left:0;top:11px;
+  font-family:var(--font-serif);font-style:italic;font-size:.95rem;color:var(--g-500)}
+
+/* zgoda */
+.consent{position:relative;display:block;cursor:pointer;padding-left:32px;font-size:.86rem;line-height:1.55;color:var(--n-100);margin-bottom:18px}
+.consent input{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
+.box{position:absolute;left:0;top:2px;width:18px;height:18px;border-radius:3px;border:1px solid rgba(203,176,120,.5);transition:background .3s var(--ease),border-color .3s var(--ease)}
+.box::after{content:"";position:absolute;left:5px;top:1px;width:5px;height:10px;border:solid var(--n-900);border-width:0 2px 2px 0;transform:rotate(45deg) scale(0);transition:transform .35s var(--ease)}
+.consent input:checked + .box{background:var(--g-400);border-color:var(--g-400)}
+.consent input:checked + .box::after{transform:rotate(45deg) scale(1)}
+.privacy-note{margin-top:10px;font-size:.74rem;line-height:1.55;color:var(--n-400)}
+.privacy-note a{color:var(--g-400);text-decoration:underline;text-underline-offset:3px}
+
+/* bledy */
+.err{display:none;margin-top:8px;font-size:.78rem;color:#E07A6E}
+.err.show{display:block;animation:up .4s var(--ease)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+
+/* wyslij */
+.submit{
+  position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;
+  width:100%;margin-top:26px;padding:18px 24px;border:0;border-radius:999px;cursor:pointer;
+  background:var(--w-500);color:var(--n-100);
+  font-size:.74rem;font-weight:500;letter-spacing:.24em;text-indent:.24em;text-transform:uppercase;
+  box-shadow:0 0 28px rgba(127,29,29,.45);
+  transition:background .4s var(--ease),color .4s var(--ease)}
+.submit::before{content:"";position:absolute;top:0;bottom:0;left:-40%;width:30%;transform:skewX(-20deg);
+  background:linear-gradient(90deg,transparent,rgba(244,240,234,.34),transparent);animation:sheen 4.5s var(--ease) infinite}
+@keyframes sheen{0%{left:-40%}60%,100%{left:130%}}
+.submit:hover{background:var(--g-500);color:var(--n-900)}
+.submit:disabled{opacity:.65;cursor:default}
+.form-msg{min-height:1.4em;margin-top:14px;text-align:center;font-size:.84rem;color:var(--n-300)}
+.form-msg.err-msg{color:#E07A6E}
+.note{text-align:center;margin-top:6px;font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--n-500)}
+.note b{font-weight:400;color:var(--g-400)}
+
+/* podziekowanie */
+.done{text-align:center;padding:clamp(30px,8vh,80px) 0}
+.done svg{width:74px;height:74px;margin-bottom:22px}
+.done circle{fill:none;stroke:rgba(203,176,120,.35);stroke-width:1.5}
+.done path{fill:none;stroke:var(--g-300);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:40;stroke-dashoffset:40;animation:tick .9s var(--ease) .3s forwards}
+@keyframes tick{to{stroke-dashoffset:0}}
+.done h2{font-family:var(--font-serif);font-weight:300;font-size:clamp(1.8rem,5vw,2.6rem);line-height:1.15;margin-bottom:14px}
+.done h2 em{font-style:italic;color:var(--g-400)}
+.done p{font-family:var(--font-serif);color:var(--n-300);max-width:46ch;margin:0 auto 28px}
+.done a{display:inline-flex;padding:14px 30px;border-radius:999px;border:1px solid rgba(203,176,120,.4);font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;transition:border-color .4s var(--ease),color .4s var(--ease)}
+.done a:hover{border-color:var(--g-400);color:var(--g-400)}
+
+footer{position:relative;z-index:1;text-align:center;padding:10px 18px 36px;font-size:.78rem;color:var(--n-500)}
+footer a{color:var(--n-300);transition:color .3s var(--ease)}
+footer a:hover{color:var(--g-400)}
+footer .legal{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 18px;margin-top:10px;font-size:.74rem}
+footer .linkish{font:inherit;background:none;border:0;padding:0;cursor:pointer;color:var(--n-300);transition:color .3s var(--ease)}
+footer .linkish:hover{color:var(--g-400)}
+footer a:focus-visible,footer .linkish:focus-visible,.privacy-note a:focus-visible{outline:2px solid var(--g-300);outline-offset:3px}
+
+@media(max-width:620px){
+  .row3,.row2{grid-template-columns:1fr}
+  .top .back span{display:none}
+  .chip span{padding:9px 15px;font-size:.8rem}
+  .thead{display:none}
+  .trow{grid-template-columns:1fr auto}
+  .trow .el{grid-column:1 / -1}
+  .trow input[type=text]{grid-column:2;grid-row:2;width:150px}
+}
+@media(max-width:400px){
+  .trow{grid-template-columns:1fr}
+  .trow input[type=text]{grid-column:1;grid-row:auto;width:100%}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none !important;transition:none !important}
+  .rule::before{transform:none}
+  .done path{stroke-dashoffset:0}
+}
+</style>
+</head>
+<body>
+
+<div class="progress" aria-hidden="true"><i id="progressBar"></i></div>
+<div class="bg" aria-hidden="true"><i></i><i></i></div>
+
+<div class="page">
+  <header class="top fx">
+    <a class="brand" href="index.html" aria-label="NikPage - strona główna"><img src="assets/logo.png" alt="" width="34" height="29"><span>NikPage<sup>&reg;</sup></span></a>
+    <a class="back" href="index.html">← <span>Strona główna</span></a>
+  </header>
+
+  <main id="formWrap">
+    <div class="head">
+      <span class="over fx" style="--d:.05s">Brief projektowy · strona internetowa</span>
+      <h1 class="fx" style="--d:.12s">Zaprojektujmy <em>Państwa stronę</em></h1>
+      <p class="lead fx" style="--d:.2s">Na podstawie tego briefu przygotuję wycenę, zakres i harmonogram strony. Wypełnienie zajmuje około 20 minut. Jeśli odpowiedź nie jest znana, wystarczy wpisać „nie wiem” - omówimy to na spotkaniu.</p>
+      <p class="how fx" style="--d:.26s"><span>Pola powiększają się w trakcie pisania</span><span>Odpowiedzi zapisują się na tym urządzeniu</span><span>Wymagane są tylko pola oznaczone *</span></p>
+      <div class="rule" aria-hidden="true"></div>
+    </div>
+
+    <div class="draft" id="draftBar" hidden>
+      <span>Przywróciłem odpowiedzi zapisane wcześniej na tym urządzeniu.</span>
+      <button type="button" id="draftClear">Zacznij od nowa</button>
+    </div>
+
+    <form id="briefForm" action="https://formspree.io/f/xpqvakdb" method="POST" novalidate>
+
+      <!-- 1. KONTAKT -->
+      <fieldset class="sec fx" style="--d:.3s" id="s1">
+        <legend><span class="num">01</span><span class="ttl">Kontakt</span></legend>
+        <div class="q">
+          <label for="f_firma">Nazwa firmy <span class="req">*</span></label>
+          <input type="text" id="f_firma" name="f_firma" maxlength="200" autocomplete="organization" data-q="1. Nazwa firmy">
+          <p class="err" id="eFirma">Podaj nazwę firmy.</p>
+        </div>
+        <div class="q">
+          <label for="f_branza">Branża i lokalizacja</label>
+          <input type="text" id="f_branza" name="f_branza" maxlength="300" placeholder="np. gabinet fizjoterapii, Poznań" data-q="1. Branża i lokalizacja">
+        </div>
+        <div class="q">
+          <span class="ql">Osoba kontaktowa <span class="req">*</span></span>
+          <div class="row3">
+            <div class="field"><label for="f_osoba">Imię i nazwisko</label><input id="f_osoba" name="f_osoba" maxlength="100" autocomplete="name" data-q="1. Osoba kontaktowa"></div>
+            <div class="field"><label for="f_tel">Telefon</label><input id="f_tel" name="f_tel" type="tel" inputmode="tel" maxlength="30" autocomplete="tel" placeholder="+48 600 700 800" data-q="1. Telefon"></div>
+            <div class="field"><label for="f_email">E-mail</label><input id="f_email" name="f_email" type="email" inputmode="email" maxlength="254" autocomplete="email" placeholder="jan@firma.pl" data-q="email"></div>
+          </div>
+          <p class="err" id="eOsoba">Podaj imię i nazwisko osoby kontaktowej.</p>
+          <p class="err" id="eReach">Podaj poprawny telefon lub adres e-mail.</p>
+        </div>
+        <div class="q">
+          <label for="f_akcept">Kto ostatecznie akceptuje projekt?</label>
+          <input type="text" id="f_akcept" name="f_akcept" maxlength="200" data-q="1. Kto akceptuje projekt">
+        </div>
+        <div class="q">
+          <span class="ql">Preferowany kanał kontaktu</span>
+          <div class="chips" data-q="1. Preferowany kanał kontaktu">
+            <label class="chip"><input type="checkbox" name="f_kanal" value="Telefon"><span>Telefon</span></label>
+            <label class="chip"><input type="checkbox" name="f_kanal" value="E-mail"><span>E-mail</span></label>
+            <label class="chip"><input type="checkbox" name="f_kanal" value="WhatsApp"><span>WhatsApp</span></label>
+          </div>
+        </div>
+        <div class="q">
+          <label for="f_linki">Obecna strona i media społecznościowe <span class="opt">(linki)</span></label>
+          <textarea id="f_linki" name="f_linki" rows="1" maxlength="1500" data-q="1. Obecna strona i social media"></textarea>
+        </div>
+      </fieldset>
+
+      <!-- 2. CEL STRONY -->
+      <fieldset class="sec key fx" id="s2">
+        <legend><span class="num">02</span><span class="ttl">Cel strony</span></legend>
+        <p class="sec-note">To najważniejsza część briefu: od niej zależy cały projekt.</p>
+        <div class="q"><label for="f_dlaczego">Dlaczego firma potrzebuje nowej strony właśnie teraz?</label>
+          <textarea id="f_dlaczego" name="f_dlaczego" rows="1" maxlength="3000" data-q="2. Dlaczego nowa strona teraz"></textarea></div>
+        <div class="q"><label for="f_zmiana">Co ma się zmienić dzięki stronie? <span class="opt">(np. więcej telefonów, rezerwacje online, mniej powtarzających się pytań)</span></label>
+          <textarea id="f_zmiana" name="f_zmiana" rows="1" maxlength="3000" data-q="2. Co ma się zmienić"></textarea></div>
+        <div class="q"><label for="f_dzialanie">Jakie jedno działanie ma wykonać odwiedzający? <span class="opt">(zadzwonić, wypełnić formularz, umówić wizytę, przyjść)</span></label>
+          <textarea id="f_dzialanie" name="f_dzialanie" rows="1" maxlength="1500" data-q="2. Główne działanie odwiedzającego"></textarea></div>
+        <div class="q"><label for="f_3mies">Po czym po 3 miesiącach poznają Państwo, że strona działa?</label>
+          <textarea id="f_3mies" name="f_3mies" rows="1" maxlength="3000" data-q="2. Miernik sukcesu po 3 miesiącach"></textarea></div>
+      </fieldset>
+
+      <!-- 3. KLIENCI -->
+      <fieldset class="sec fx" id="s3">
+        <legend><span class="num">03</span><span class="ttl">Klienci</span></legend>
+        <div class="q"><label for="f_kto">Kim są typowi klienci firmy? <span class="opt">(wiek, miejsce zamieszkania, sytuacja)</span></label>
+          <textarea id="f_kto" name="f_kto" rows="1" maxlength="3000" data-q="3. Typowi klienci"></textarea></div>
+        <div class="q"><label for="f_problem">Z jakim problemem lub potrzebą do Państwa przychodzą?</label>
+          <textarea id="f_problem" name="f_problem" rows="1" maxlength="3000" data-q="3. Problem / potrzeba klienta"></textarea></div>
+        <div class="q"><label for="f_pytania">Jakie pytania zadają najczęściej, zanim skorzystają z usługi?</label>
+          <textarea id="f_pytania" name="f_pytania" rows="1" maxlength="3000" data-q="3. Najczęstsze pytania"></textarea></div>
+        <div class="q"><label for="f_wybor">Co sprawia, że wybierają Państwa, a nie konkurencję?</label>
+          <textarea id="f_wybor" name="f_wybor" rows="1" maxlength="3000" data-q="3. Dlaczego wybierają nas"></textarea></div>
+        <div class="q"><label for="f_skad">Skąd dziś się o Państwu dowiadują?</label>
+          <textarea id="f_skad" name="f_skad" rows="1" maxlength="1500" data-q="3. Skąd się dowiadują"></textarea></div>
+      </fieldset>
+
+      <!-- 4. OFERTA -->
+      <fieldset class="sec fx" id="s4">
+        <legend><span class="num">04</span><span class="ttl">Oferta</span></legend>
+        <div class="q"><label for="f_uslugi">Najważniejsze usługi lub produkty <span class="opt">(maks. 3, od najważniejszej)</span></label>
+          <textarea id="f_uslugi" name="f_uslugi" rows="1" maxlength="3000" placeholder="1. &#10;2. &#10;3. " data-q="4. Najważniejsze usługi / produkty"></textarea></div>
+        <div class="q">
+          <span class="ql">Czy ceny mają być na stronie?</span>
+          <div class="chips" data-q="4. Ceny na stronie">
+            <label class="chip"><input type="radio" name="f_ceny" value="Tak"><span>Tak</span></label>
+            <label class="chip"><input type="radio" name="f_ceny" value="Orientacyjne"><span>Orientacyjne</span></label>
+            <label class="chip"><input type="radio" name="f_ceny" value="Nie"><span>Nie</span></label>
+          </div>
+        </div>
+        <div class="q"><label for="f_opinie">Opinie, certyfikaty, nagrody lub liczby, którymi warto się pochwalić</label>
+          <textarea id="f_opinie" name="f_opinie" rows="1" maxlength="3000" data-q="4. Opinie, certyfikaty, liczby"></textarea></div>
+      </fieldset>
+
+      <!-- 5. KONKURENCJA -->
+      <fieldset class="sec fx" id="s5">
+        <legend><span class="num">05</span><span class="ttl">Konkurencja i inspiracje</span></legend>
+        <div class="q"><label for="f_konk">2–3 konkurentów <span class="opt">(linki)</span>: co jest u nich dobre, a co słabe?</label>
+          <textarea id="f_konk" name="f_konk" rows="1" maxlength="3000" data-q="5. Konkurenci"></textarea></div>
+        <div class="q"><label for="f_inspir">2–3 strony z dowolnej branży, które się Państwu podobają, i dlaczego</label>
+          <textarea id="f_inspir" name="f_inspir" rows="1" maxlength="3000" data-q="5. Inspiracje"></textarea></div>
+        <div class="q"><label for="f_nie">Czego na stronie zdecydowanie nie chcą Państwo widzieć?</label>
+          <textarea id="f_nie" name="f_nie" rows="1" maxlength="3000" data-q="5. Czego nie chcą"></textarea></div>
+      </fieldset>
+
+      <!-- 6. ZAKRES -->
+      <fieldset class="sec fx" id="s6">
+        <legend><span class="num">06</span><span class="ttl">Zakres strony</span></legend>
+        <p class="sec-note">Proszę zaznaczyć, co ma się znaleźć na stronie.</p>
+        <div class="q">
+          <p class="sub">Podstrony</p>
+          <div class="chips" data-q="6. Podstrony">
+            <label class="chip"><input type="checkbox" name="f_podstrony" value="Strona główna"><span>Strona główna</span></label>
+            <label class="chip"><input type="checkbox" name="f_podstrony" value="O nas"><span>O nas</span></label>
+            <label class="chip"><input type="checkbox" name="f_podstrony" value="Oferta / usługi"><span>Oferta / usługi</span></label>
+            <label class="chip"><input type="checkbox" name="f_podstrony" value="Cennik"><span>Cennik</span></label>
+            <label class="chip"><input type="checkbox" name="f_podstrony" value="Realizacje / galeria"><span>Realizacje / galeria</span></label>
+            <label class="chip"><input type="checkbox" name="f_podstrony" value="Opinie klientów"><span>Opinie klientów</span></label>
+            <label class="chip"><input type="checkbox" name="f_podstrony" value="FAQ"><span>FAQ</span></label>
+            <label class="chip"><input type="checkbox" name="f_podstrony" value="Blog / aktualności"><span>Blog / aktualności</span></label>
+            <label class="chip"><input type="checkbox" name="f_podstrony" value="Kontakt"><span>Kontakt</span></label>
+          </div>
+        </div>
+        <div class="q">
+          <p class="sub">Funkcje</p>
+          <div class="chips" data-q="6. Funkcje">
+            <label class="chip"><input type="checkbox" name="f_funkcje" value="Formularz kontaktowy"><span>Formularz kontaktowy</span></label>
+            <label class="chip"><input type="checkbox" name="f_funkcje" value="Rezerwacja wizyt online"><span>Rezerwacja wizyt online</span></label>
+            <label class="chip"><input type="checkbox" name="f_funkcje" value="Mapa i dojazd"><span>Mapa i dojazd</span></label>
+            <label class="chip"><input type="checkbox" name="f_funkcje" value="Wersja w innym języku"><span>Wersja w innym języku</span></label>
+            <label class="chip"><input type="checkbox" name="f_funkcje" value="Sklep lub płatności online"><span>Sklep lub płatności online</span></label>
+            <label class="chip"><input type="checkbox" name="f_funkcje" value="Newsletter"><span>Newsletter</span></label>
+            <label class="chip"><input type="checkbox" name="f_funkcje" value="Wizytówka Google i statystyki odwiedzin"><span>Połączenie z wizytówką Google i statystykami odwiedzin</span></label>
+          </div>
+        </div>
+        <div class="q">
+          <span class="ql">Czy firma ma już domenę i hosting?</span>
+          <div class="chips" data-q="6. Domena i hosting">
+            <label class="chip"><input type="radio" name="f_domena" value="Tak"><span>Tak</span></label>
+            <label class="chip"><input type="radio" name="f_domena" value="Nie"><span>Nie</span></label>
+            <label class="chip"><input type="radio" name="f_domena" value="Nie wiem"><span>Nie wiem</span></label>
+          </div>
+        </div>
+        <div class="q"><label for="f_aktual">Kto będzie aktualizował stronę po publikacji?</label>
+          <input type="text" id="f_aktual" name="f_aktual" maxlength="300" data-q="6. Kto aktualizuje stronę"></div>
+        <div class="q"><label for="f_inne">Inne podstrony lub funkcje</label>
+          <textarea id="f_inne" name="f_inne" rows="1" maxlength="3000" data-q="6. Inne podstrony / funkcje"></textarea></div>
+      </fieldset>
+
+      <!-- 7. WYGLAD -->
+      <fieldset class="sec fx" id="s7">
+        <legend><span class="num">07</span><span class="ttl">Wygląd</span></legend>
+        <div class="q">
+          <span class="ql">Czy firma ma logo? <span class="opt">W jakim formacie (najlepiej SVG, AI lub PDF)?</span></span>
+          <div class="chips" data-q="7. Logo">
+            <label class="chip"><input type="radio" name="f_logo" value="Tak"><span>Tak</span></label>
+            <label class="chip"><input type="radio" name="f_logo" value="Nie"><span>Nie</span></label>
+          </div>
+          <input type="text" id="f_logofmt" name="f_logofmt" maxlength="200" placeholder="Format pliku, np. SVG, PDF, PNG" data-q="7. Format logo">
+        </div>
+        <div class="q"><label for="f_kolory">Kolory i czcionki firmowe, jeśli są</label>
+          <textarea id="f_kolory" name="f_kolory" rows="1" maxlength="1500" data-q="7. Kolory i czcionki"></textarea></div>
+        <div class="q"><label for="f_przym">Jak strona ma się kojarzyć? <span class="opt">Proszę podać 3 przymiotniki (np. spokojna, nowoczesna, elegancka)</span></label>
+          <input type="text" id="f_przym" name="f_przym" maxlength="300" data-q="7. Trzy przymiotniki"></div>
+        <div class="q">
+          <span class="ql">Czy firma ma profesjonalne zdjęcia? <span class="opt">(zespół, miejsce, realizacje)</span></span>
+          <div class="chips" data-q="7. Profesjonalne zdjęcia">
+            <label class="chip"><input type="radio" name="f_zdjecia" value="Tak"><span>Tak</span></label>
+            <label class="chip"><input type="radio" name="f_zdjecia" value="Częściowo"><span>Częściowo</span></label>
+            <label class="chip"><input type="radio" name="f_zdjecia" value="Nie"><span>Nie</span></label>
+          </div>
+          <input type="text" id="f_zdjeciaopis" name="f_zdjeciaopis" maxlength="500" placeholder="Jakie zdjęcia są dostępne? (opcjonalnie)" data-q="7. Zdjęcia - opis">
+        </div>
+      </fieldset>
+
+      <!-- 8. TRESCI -->
+      <fieldset class="sec fx" id="s8">
+        <legend><span class="num">08</span><span class="ttl">Treści</span></legend>
+        <p class="sec-note">Prace projektowe zaczynam po otrzymaniu kompletu treści albo po zleceniu ich przygotowania mnie. Treści przygotowane przez NikPage wyceniam osobno. Proszę zaznaczyć, kto przygotowuje każdy element, i wpisać termin.</p>
+        <div class="thead" aria-hidden="true"><span>Element</span><span>Kto przygotowuje</span><span>Termin dostarczenia</span></div>
+        <div class="trows">
+          <div class="trow" data-q="8. Teksty na podstrony"><span class="el">Teksty na podstrony</span>
+            <div class="chips"><label class="chip"><input type="checkbox" name="t_teksty" value="Klient"><span>Klient</span></label><label class="chip"><input type="checkbox" name="t_teksty" value="NikPage"><span>NikPage</span></label></div>
+            <input type="text" name="t_teksty_termin" maxlength="60" placeholder="Termin" aria-label="Termin - teksty na podstrony"></div>
+          <div class="trow" data-q="8. Opisy usług i cennik"><span class="el">Opisy usług i cennik</span>
+            <div class="chips"><label class="chip"><input type="checkbox" name="t_opisy" value="Klient"><span>Klient</span></label><label class="chip"><input type="checkbox" name="t_opisy" value="NikPage"><span>NikPage</span></label></div>
+            <input type="text" name="t_opisy_termin" maxlength="60" placeholder="Termin" aria-label="Termin - opisy usług i cennik"></div>
+          <div class="trow" data-q="8. Zdjęcia"><span class="el">Zdjęcia</span>
+            <div class="chips"><label class="chip"><input type="checkbox" name="t_zdjecia" value="Klient"><span>Klient</span></label><label class="chip"><input type="checkbox" name="t_zdjecia" value="NikPage"><span>NikPage</span></label></div>
+            <input type="text" name="t_zdjecia_termin" maxlength="60" placeholder="Termin" aria-label="Termin - zdjęcia"></div>
+          <div class="trow" data-q="8. Logo i materiały graficzne"><span class="el">Logo i materiały graficzne</span>
+            <div class="chips"><label class="chip"><input type="checkbox" name="t_logo" value="Klient"><span>Klient</span></label><label class="chip"><input type="checkbox" name="t_logo" value="NikPage"><span>NikPage</span></label></div>
+            <input type="text" name="t_logo_termin" maxlength="60" placeholder="Termin" aria-label="Termin - logo i materiały graficzne"></div>
+          <div class="trow" data-q="8. Opinie klientów"><span class="el">Opinie klientów</span>
+            <div class="chips"><label class="chip"><input type="checkbox" name="t_opinie" value="Klient"><span>Klient</span></label><label class="chip"><input type="checkbox" name="t_opinie" value="NikPage"><span>NikPage</span></label></div>
+            <input type="text" name="t_opinie_termin" maxlength="60" placeholder="Termin" aria-label="Termin - opinie klientów"></div>
+          <div class="trow" data-q="8. Dane kontaktowe i godziny otwarcia"><span class="el">Dane kontaktowe i godziny otwarcia</span>
+            <div class="chips"><label class="chip"><input type="checkbox" name="t_dane" value="Klient"><span>Klient</span></label><label class="chip"><input type="checkbox" name="t_dane" value="NikPage"><span>NikPage</span></label></div>
+            <input type="text" name="t_dane_termin" maxlength="60" placeholder="Termin" aria-label="Termin - dane kontaktowe i godziny otwarcia"></div>
+        </div>
+      </fieldset>
+
+      <!-- 9. BUDZET -->
+      <fieldset class="sec fx" id="s9">
+        <legend><span class="num">09</span><span class="ttl">Budżet i termin</span></legend>
+        <div class="row2">
+          <div class="q"><label for="f_budzet">Planowany budżet <span class="opt">(kwota lub przedział)</span></label>
+            <input type="text" id="f_budzet" name="f_budzet" maxlength="100" placeholder="np. 1000–1500 zł" data-q="9. Budżet"></div>
+          <div class="q"><label for="f_data">Pożądana data publikacji</label>
+            <input type="text" id="f_data" name="f_data" maxlength="100" placeholder="np. koniec marca" data-q="9. Data publikacji"></div>
+        </div>
+        <div class="q"><label for="f_powod">Czy termin jest z czymś związany? <span class="opt">(otwarcie, sezon, kampania)</span></label>
+          <textarea id="f_powod" name="f_powod" rows="1" maxlength="1500" data-q="9. Z czym związany termin"></textarea></div>
+        <div class="q"><label for="f_urlop">Okresy, w których nie będą Państwo dostępni <span class="opt">(np. urlop)</span></label>
+          <textarea id="f_urlop" name="f_urlop" rows="1" maxlength="1500" data-q="9. Niedostępność"></textarea></div>
+      </fieldset>
+
+      <!-- 10. ZASADY -->
+      <fieldset class="sec key fx" id="s10">
+        <legend><span class="num">10</span><span class="ttl">Zasady współpracy</span></legend>
+        <p class="sec-note">Te zasady pozwalają skończyć projekt w terminie. Wiążące warunki zapisujemy w umowie.</p>
+        <ol class="rules">
+          <li>Zaliczka 50% wartości projektu przed rozpoczęciem prac, reszta przed publikacją.</li>
+          <li>Komplet treści trafia do mnie w terminach z sekcji 8.</li>
+          <li>Na każdą wersję projektu odpowiadają Państwo w ciągu 3 dni roboczych.</li>
+          <li>W cenie są 2 rundy poprawek, kolejne wyceniam osobno.</li>
+          <li>Jedna osoba po stronie firmy zbiera uwagi i akceptuje projekt.</li>
+          <li>Brak odpowiedzi przez 14 dni oznacza zakończenie projektu na bieżącym etapie i rozliczenie wykonanych prac.</li>
+        </ol>
+        <label class="consent"><input type="checkbox" id="f_zasady" name="f_zasady"><span class="box" aria-hidden="true"></span>Akceptuję zasady współpracy. <span class="req">*</span></label>
+        <p class="err" id="eZasady">Zaznacz akceptację zasad współpracy.</p>
+        <div class="row2">
+          <div class="q"><label for="f_podpis">Imię i nazwisko <span class="req">*</span></label>
+            <input type="text" id="f_podpis" name="f_podpis" maxlength="100" autocomplete="name" data-q="10. Akceptuje (imię i nazwisko)">
+            <p class="err" id="ePodpis">Podaj imię i nazwisko.</p></div>
+          <div class="q"><label for="f_dzis">Data</label>
+            <input type="date" id="f_dzis" name="f_dzis" data-q="10. Data akceptacji"></div>
+        </div>
+        <p class="privacy-note">Dane z briefu trafiają wyłącznie do mnie i służą tylko do przygotowania wyceny i projektu. Szczegóły w <a href="polityka-prywatnosci.html">polityce prywatności</a>.</p>
+      </fieldset>
+
+      <div>
+        <input type="text" id="hp" name="_gotcha" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true">
+        <button class="submit" type="submit" id="submitBtn">Wyślij brief</button>
+        <p class="form-msg" id="formMsg" role="status" aria-live="polite"></p>
+        <p class="note">Wycenę i harmonogram przygotuję w ciągu <b>2 dni roboczych</b></p>
+      </div>
+    </form>
+  </main>
+
+  <section class="done" id="done" hidden>
+    <svg viewBox="0 0 74 74" aria-hidden="true"><circle cx="37" cy="37" r="35"/><path d="M24 38.5l9 9 17-19"/></svg>
+    <h2>Dziękuję, <em>brief dotarł</em></h2>
+    <p>Przeanalizuję odpowiedzi i wrócę z wyceną, zakresem i harmonogramem - albo z kilkoma pytaniami przed spotkaniem.</p>
+    <a href="index.html">Wróć na stronę</a>
+  </section>
+</div>
+
+<footer>Pytania do briefu? <a href="tel:+48662477772">+48 662 477 772</a> · <a href="mailto:michal.nikielski@nikpage.pl">michal.nikielski@nikpage.pl</a>
+  <span class="legal"><a href="polityka-prywatnosci.html">Polityka prywatności</a><a href="dostepnosc.html">Dostępność</a><button type="button" class="linkish" data-cookie-settings>Ustawienia cookies</button></span>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var form = document.getElementById('briefForm');
+  if(!form) return;
+  function $(id){ return document.getElementById(id); }
+  function all(sel, root){ return Array.prototype.slice.call((root || form).querySelectorAll(sel)); }
+  var DRAFT_KEY = 'nk-brief-draft';
+
+  /* ---------- data dzisiejsza ---------- */
+  function today(){
+    var t = new Date();
+    return t.getFullYear() + '-' + String(t.getMonth()+1).padStart(2,'0') + '-' + String(t.getDate()).padStart(2,'0');
+  }
+
+  /* ---------- pola rosna w trakcie pisania ---------- */
+  var areas = all('textarea');
+  function grow(t){ t.style.height = 'auto'; t.style.height = t.scrollHeight + 2 + 'px'; }
+  areas.forEach(function(t){ t.addEventListener('input', function(){ grow(t); }); });
+  window.addEventListener('resize', function(){ areas.forEach(grow); });
+
+  /* ---------- szkic w localStorage (brief to ~20 minut pisania) ---------- */
+  function controls(){ return all('input, textarea').filter(function(el){ return el.name && el.name.charAt(0) !== '_'; }); }
+  function saveDraft(){
+    var d = {v:{}, c:[]};
+    controls().forEach(function(el){
+      if(el.type === 'checkbox' || el.type === 'radio'){ if(el.checked) d.c.push(el.name + '|' + el.value); }
+      else if(el.value) d.v[el.name] = el.value;
+    });
+    try{ localStorage.setItem(DRAFT_KEY, JSON.stringify(d)); }catch(e){}
+  }
+  function loadDraft(){
+    var raw = null;
+    try{ raw = localStorage.getItem(DRAFT_KEY); }catch(e){}
+    if(!raw) return false;
+    var d; try{ d = JSON.parse(raw); }catch(e){ return false; }
+    if(!d || !d.v) return false;
+    var any = false;
+    controls().forEach(function(el){
+      if(el.type === 'checkbox' || el.type === 'radio'){
+        if(d.c.indexOf(el.name + '|' + el.value) !== -1){ el.checked = true; any = true; }
+      }else if(d.v[el.name] != null){ el.value = d.v[el.name]; if(el.name !== 'f_dzis') any = true; }
+    });
+    return any;
+  }
+  function clearDraft(){ try{ localStorage.removeItem(DRAFT_KEY); }catch(e){} }
+
+  var saveTimer = 0;
+  form.addEventListener('input', function(){ clearTimeout(saveTimer); saveTimer = setTimeout(saveDraft, 400); updateProgress(); });
+  form.addEventListener('change', function(){ saveDraft(); updateProgress(); });
+
+  if(loadDraft()) $('draftBar').hidden = false;
+  if(!$('f_dzis').value) $('f_dzis').value = today();
+  $('draftClear').addEventListener('click', function(){
+    if(!confirm('Wyczyścić wszystkie odpowiedzi?')) return;
+    clearDraft(); form.reset(); $('f_dzis').value = today();
+    $('draftBar').hidden = true;
+    areas.forEach(grow); updateProgress();
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+  /* po wczytaniu fontow i szkicu - dopasuj wysokosci */
+  requestAnimationFrame(function(){ areas.forEach(grow); });
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ areas.forEach(grow); });
+
+  /* ---------- pasek postepu: ile pytan ma odpowiedz ---------- */
+  var questions = all('[data-q]').filter(function(q){ return q.id !== 'f_dzis'; });
+  function answered(q){
+    if(q.matches('input, textarea')) return !!q.value.trim();
+    return !!q.querySelector('input:checked') || all('input[type=text]', q).some(function(i){ return i.value.trim(); });
+  }
+  function updateProgress(){
+    var n = questions.filter(answered).length + ($('f_zasady').checked ? 1 : 0);
+    $('progressBar').style.transform = 'scaleX(' + (n / (questions.length + 1)) + ')';
+  }
+  updateProgress();
+
+  /* ---------- bledy ---------- */
+  function showErr(secId, errId, el){ $(secId).classList.add('bad'); $(errId).classList.add('show'); if(el) el.classList.add('bad-in'); }
+  function clearErrs(secId, errIds, els){
+    errIds.forEach(function(id){ $(id).classList.remove('show'); });
+    (els || []).forEach(function(el){ el.classList.remove('bad-in'); });
+    if(!$(secId).querySelector('.err.show')) $(secId).classList.remove('bad');
+  }
+  $('f_firma').addEventListener('input', function(){ clearErrs('s1', ['eFirma'], [this]); });
+  $('f_osoba').addEventListener('input', function(){ clearErrs('s1', ['eOsoba'], [this]); });
+  ['f_tel', 'f_email'].forEach(function(id){ $(id).addEventListener('input', function(){ clearErrs('s1', ['eReach'], [$('f_tel'), $('f_email')]); }); });
+  $('f_zasady').addEventListener('change', function(){ clearErrs('s10', ['eZasady']); });
+  $('f_podpis').addEventListener('input', function(){ clearErrs('s10', ['ePodpis'], [this]); });
+  /* podpis: podpowiedz z osoby kontaktowej, dopoki ktos go sam nie zmieni */
+  var podpisTouched = !!$('f_podpis').value;
+  $('f_podpis').addEventListener('input', function(){ podpisTouched = true; });
+  $('f_osoba').addEventListener('input', function(){ if(!podpisTouched) $('f_podpis').value = this.value; });
+
+  var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  function validate(){
+    var first = null;
+    function fail(sec, err, el){ showErr(sec, err, el); if(!first) first = el || $(err); }
+    if(!$('f_firma').value.trim()) fail('s1', 'eFirma', $('f_firma'));
+    if($('f_osoba').value.trim().length < 3) fail('s1', 'eOsoba', $('f_osoba'));
+    var phone = $('f_tel').value.trim(), email = $('f_email').value.trim();
+    var phoneOk = phone.replace(/\D/g, '').length >= 9, emailOk = emailRe.test(email);
+    if(!((phone || email) && (!phone || phoneOk) && (!email || emailOk))){
+      if(phone && !phoneOk || !phone && !email) $('f_tel').classList.add('bad-in');
+      if(email && !emailOk || !phone && !email) $('f_email').classList.add('bad-in');
+      fail('s1', 'eReach', phone && !phoneOk ? $('f_tel') : $('f_email'));
+    }
+    if(!$('f_zasady').checked) fail('s10', 'eZasady', null);
+    if($('f_podpis').value.trim().length < 3) fail('s10', 'ePodpis', $('f_podpis'));
+    if(first){ first.scrollIntoView({behavior:'smooth', block:'center'}); if(first.focus) first.focus({preventScroll:true}); return false; }
+    return true;
+  }
+
+  /* ---------- odpowiedz na pytanie jako tekst do maila ---------- */
+  function valueOf(q){
+    if(q.matches('input, textarea')) return q.value.trim();
+    var picked = all('input:checked', q).map(function(i){ return i.value; }).join(', ');
+    var extra = all('input[type=text]', q).map(function(i){ return i.value.trim(); }).filter(Boolean).join(' ');
+    if(q.classList.contains('trow')) return [picked, extra ? 'termin: ' + extra : ''].filter(Boolean).join(' · ');
+    return [picked, extra].filter(Boolean).join(' - ');
+  }
+
+  /* ---------- wysylka (Formspree - ten sam formularz co kontakt.html) ---------- */
+  var btn = $('submitBtn'), msg = $('formMsg');
+  var openedAt = Date.now();
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    msg.textContent = ''; msg.className = 'form-msg';
+    if(!validate()) return;
+    if($('hp').value || Date.now() - openedAt < 4000){
+      msg.className = 'form-msg err-msg';
+      msg.textContent = 'Chwileczkę - spróbuj wysłać ponownie za kilka sekund.';
+      return;
+    }
+
+    var fd = new FormData();
+    fd.append('_subject', 'Brief projektowy NikPage - ' + $('f_firma').value.trim());
+    all('[data-q]').forEach(function(q){
+      var v = valueOf(q);
+      if(v) fd.append(q.getAttribute('data-q'), v);
+    });
+    fd.append('10. Akceptacja zasad współpracy', 'tak');
+    fd.append('_gotcha', $('hp').value);
+
+    btn.disabled = true; btn.textContent = 'Wysyłanie…';
+    fetch(form.action, {method:'POST', body:fd, headers:{'Accept':'application/json'}})
+      .then(function(r){
+        if(r.ok){
+          if(typeof gtag === 'function') gtag('event', 'generate_lead', {form:'brief'});
+          clearDraft();
+          $('formWrap').hidden = true;
+          $('done').hidden = false;
+          $('progressBar').style.transform = 'scaleX(1)';
+          window.scrollTo({top:0, behavior:'smooth'});
+          return;
+        }
+        return r.json().catch(function(){ return null; }).then(function(data){
+          var detail = data && data.errors && data.errors[0] && data.errors[0].message ? ' (' + data.errors[0].message + ')' : '';
+          throw new Error(detail);
+        });
+      })
+      .catch(function(err){
+        msg.className = 'form-msg err-msg';
+        msg.textContent = 'Nie udało się wysłać' + ((err && err.message) || '') + '. Odpowiedzi są zapisane na tym urządzeniu - spróbuj ponownie albo napisz: michal.nikielski@nikpage.pl';
+      })
+      .then(function(){ btn.disabled = false; btn.textContent = 'Wyślij brief'; });
+  });
+})();
+</script>
+</body>
+</html>
